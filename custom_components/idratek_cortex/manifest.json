@@ -1,0 +1,13 @@
+{
+  "domain": "idratek_cortex",
+  "name": "Idratek Cortex",
+  "version": "0.1.0",
+  "documentation": "https://github.com/NevvynPieEater/hass-cortex",
+  "issue_tracker": "https://github.com/NevvynPieEater/hass-cortex/issues",
+  "codeowners": ["@NevvynPieEater"],
+  "requirements": [],
+  "dependencies": [],
+  "config_flow": true,
+  "integration_type": "hub",
+  "iot_class": "local_polling"
+}

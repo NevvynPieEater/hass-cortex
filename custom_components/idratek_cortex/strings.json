@@ -1,0 +1,48 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Idratek Cortex",
+        "description": "Enter the address of the Cortex web server and the Cortex Web API user.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password",
+          "ssl": "Use HTTPS",
+          "verify_ssl": "Verify HTTPS certificate"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Idratek Cortex",
+        "description": "Change the address or login. Existing entities are kept.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password",
+          "ssl": "Use HTTPS",
+          "verify_ssl": "Verify HTTPS certificate"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not read the object list from Cortex. Check the host, port and that the Web Server is running.",
+      "no_permission": "Cortex answered, but this user is not permitted to access any lights, blinds or sockets. Check the username, password and the Web Server access rights."
+    },
+    "abort": {
+      "already_configured": "This Cortex server is already configured.",
+      "reconfigure_successful": "Settings updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Idratek Cortex options",
+        "data": {
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    }
+  }
+}
