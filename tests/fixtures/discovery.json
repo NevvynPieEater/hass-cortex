@@ -289,6 +289,28 @@
    "Prompt.Display.Option.ParameterString": {},
    "IconOffset": "0",
    "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Room",
+   "FriendlyName": "Garage",
+   "IDNumber": "28",
+   "RefImage": "3",
+   "Parent": "Downstairs",
+   "Prompt.Display.Name": "Garage",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Room",
+   "FriendlyName": "Shower",
+   "IDNumber": "29",
+   "RefImage": "3",
+   "Parent": "Downstairs",
+   "Prompt.Display.Name": "Shower",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
   }
  ],
  "layouts": {
@@ -979,6 +1001,80 @@
     "Icon on time",
     "ValueOut"
    ]
+  ],
+  "Room": [
+   [
+    "Motion input and other PIR detectors",
+    "In"
+   ],
+   [
+    "Door state input",
+    "In"
+   ],
+   [
+    "Occupied state output",
+    "Out"
+   ],
+   [
+    "Association",
+    "In"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "On occupied",
+    "Out"
+   ],
+   [
+    "On un-occupied",
+    "Out"
+   ],
+   [
+    "Delayed occupied state output",
+    "Out"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "On delayed occupied",
+    "Out"
+   ],
+   [
+    "Delayed unoccupied state output",
+    "Out"
+   ],
+   [
+    "On delayed unoccupied",
+    "Out"
+   ],
+   [
+    "Occupied detector",
+    "In"
+   ],
+   [
+    "Clear Occupied",
+    "In"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
   ]
  },
  "values": {
@@ -1228,6 +1324,127 @@
    "Temperature Differential": "-0.260301708868213",
    "Icon off time": "0",
    "Icon on time": "0"
+  },
+  "25": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46323.0000327431",
+   "Icon on time": "46322.9998537153"
+  },
+  "28": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46321.4952025231",
+   "Icon on time": "46321.4945073843"
+  },
+  "29": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46322.7713682986",
+   "Icon on time": "46322.7712218056"
+  },
+  "122": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46322.684391088",
+   "Icon on time": "46322.6841544676"
+  },
+  "123": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46323.0008607292",
+   "Icon on time": "46323.0001728935"
+  },
+  "30": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46322.9475942245",
+   "Icon on time": "46322.9474395139"
+  },
+  "31": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46323.007108206",
+   "Icon on time": "46323.0069923264"
+  },
+  "32": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46323.0072792245",
+   "Icon on time": "46323.0072522569"
+  },
+  "36": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46323.0072522569",
+   "Icon on time": "46323.0071706018"
+  },
+  "37": {
+   "Occupied state output": "0",
+   "On occupied": "0",
+   "On un-occupied": "0",
+   "Delayed occupied state output": "0",
+   "On delayed occupied": "0",
+   "Delayed unoccupied state output": "0",
+   "On delayed unoccupied": "0",
+   "Icon off time": "46322.6536691667",
+   "Icon on time": "46322.6535425231"
+  },
+  "33": {
+   "Occupied state output": "100",
+   "On occupied": "100",
+   "On un-occupied": "100",
+   "Delayed occupied state output": "100",
+   "On delayed occupied": "100",
+   "Delayed unoccupied state output": "100",
+   "On delayed unoccupied": "100",
+   "Icon off time": "46323.0013706597",
+   "Icon on time": "46323.0014356597"
   }
  }
 }

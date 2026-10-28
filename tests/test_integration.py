@@ -145,8 +145,9 @@ async def test_entities_created(hass: HomeAssistant, cortex) -> None:
     # 18 temperatures + humidity + light level + 2 HVAC set-points
     # (the dew point sensor is disabled by default)
     assert len(hass.states.async_all("sensor")) == 22
-    # 6 doors, 1 motion, 3 property presence, 1 dark, 4 boiler, 2 heat zone, 1 fan, 2 HVAC
-    assert len(hass.states.async_all("binary_sensor")) == 20
+    # 6 doors, 1 motion, 3 property presence, 1 dark, 4 boiler, 2 heat zone, 1 fan, 2 HVAC,
+    # 11 room occupancy (the delayed-occupancy sensors are disabled by default)
+    assert len(hass.states.async_all("binary_sensor")) == 31
     coordinator = entry.runtime_data
     assert not coordinator.skipped
 
@@ -284,6 +285,24 @@ async def test_doors_motion_and_presence(hass: HomeAssistant, cortex) -> None:
     assert light.device_id == house.device_id
 
 
+async def test_room_occupancy(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    registry = er.async_get(hass)
+    bedroom = hass.states.get(entity_id_for(hass, entry, "33", "binary_sensor"))
+    assert bedroom.state == STATE_ON
+    assert bedroom.attributes["device_class"] == "occupancy"
+    assert bedroom.attributes["friendly_name"] == "Bedroom 1 Occupancy"
+    kitchen = hass.states.get(entity_id_for(hass, entry, "25", "binary_sensor"))
+    assert kitchen.state == STATE_OFF
+    # shares a device with the room's lights, not a "Downstairs" device
+    light = registry.async_get(entity_id_for(hass, entry, "76", "light"))
+    assert registry.async_get(kitchen.entity_id).device_id == light.device_id
+    delayed = registry.async_get(
+        registry.async_get_entity_id("binary_sensor", DOMAIN, f"{entry.entry_id}_25_delayed")
+    )
+    assert delayed.disabled_by is er.RegistryEntryDisabler.INTEGRATION
+
+
 async def test_boiler_fan_and_heat_zone(hass: HomeAssistant, cortex) -> None:
     entry = await setup_entry(hass, cortex)
     for object_id in ("452", "617", "946", "470"):
@@ -332,6 +351,6 @@ async def test_diagnostics_redacts_credentials(hass: HomeAssistant, cortex) -> N
     assert "127.0.0.1" not in text
     assert diag["entry"][CONF_PASSWORD] == "**REDACTED**"
     assert diag["object_counts"]["Light"] == 21
-    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1
+    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 11
     assert diag["skipped"] == {}
     assert any("Turn On" in line for line in diag["port_layouts"]["Light"])

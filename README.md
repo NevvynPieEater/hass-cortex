@@ -30,15 +30,16 @@ The Cortex Web API is undocumented. This integration is built from captured repl
 | Temperature | `sensor` (°C) | Read verified on a real system |
 | Humidity | `sensor` (%, plus a dew point sensor that is disabled by default) | Read verified |
 | LightLevel | `sensor` (raw value, unit unconfirmed) and a `binary_sensor` "Dark" | Read verified |
-| Door | `binary_sensor` (door) | Read verified. Assumes `Door output state` 100 = open |
+| Door | `binary_sensor` (door) | Read verified. Assumes `Door output state` 100 = open (not yet confirmed on site) |
 | Motion | `binary_sensor` (motion) | Read verified |
+| Room | `binary_sensor` (occupancy) per room, plus a delayed occupancy sensor that is disabled by default | Read verified |
 | House | `binary_sensor` (occupancy), vacant mode, unoccupied over 24 hours | Read verified |
 | Boiler, HeatZone, FanControl | `binary_sensor` (running / heat) | Read verified |
 | HVAC | heating and cooling demand `binary_sensor`s, set-point `sensor`s | Read verified |
 
 Intercom and button panels (`Buttons122`) are not exposed yet.
 
-Tested with a mock Cortex built from real replies (30 automated tests) on Home Assistant 2026.2.3.
+Tested with a mock Cortex built from real replies (31 automated tests) on Home Assistant 2026.2.3.
 Not yet run against a live Cortex from inside Home Assistant.
 
 ---

@@ -22,6 +22,7 @@ from .const import (
     TYPE_HVAC,
     TYPE_LIGHT_LEVEL,
     TYPE_MOTION,
+    TYPE_ROOM,
 )
 from .coordinator import CortexCoordinator, SupportedObject
 from .entity import CortexEntity, to_float
@@ -59,6 +60,23 @@ SPECS: dict[str, tuple[BinarySpec, ...]] = {
         ),
         BinarySpec("vacant", "Vacant mode", None, replace_name=True),
         BinarySpec("unoccupied_24h", "Unoccupied over 24 hours", None, replace_name=True),
+    ),
+    # Room occupancy as worked out by Cortex from its motion sensors and doors.
+    TYPE_ROOM: (
+        BinarySpec(
+            "state",
+            "Occupancy",
+            BinarySensorDeviceClass.OCCUPANCY,
+            first=True,
+            replace_name=True,
+        ),
+        BinarySpec(
+            "delayed",
+            "Delayed occupancy",
+            BinarySensorDeviceClass.OCCUPANCY,
+            enabled_default=False,
+            replace_name=True,
+        ),
     ),
     TYPE_LIGHT_LEVEL: (BinarySpec("dark", "Dark", None, replace_name=True),),
     TYPE_BOILER: (

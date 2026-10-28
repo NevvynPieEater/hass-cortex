@@ -34,6 +34,7 @@ TYPE_BOILER = "Boiler"
 TYPE_HEAT_ZONE = "HeatZone"
 TYPE_FAN = "FanControl"
 TYPE_HVAC = "HVAC"
+TYPE_ROOM = "Room"
 
 # Per type: which ports are read for state (role -> exact Cortex port name).
 # Port names (not numbers) are used because numeric lookups were inconsistent
@@ -61,6 +62,10 @@ STATE_PORTS: dict[str, dict[str, str]] = {
     TYPE_BOILER: {"state": "Set State (Output)", "demand": "Demand for extra heating"},
     TYPE_HEAT_ZONE: {"state": "Set State (Output)", "to_boiler": "Output To Boiler"},
     TYPE_FAN: {"state": "Set State (Output)"},
+    TYPE_ROOM: {
+        "state": "Occupied state output",
+        "delayed": "Delayed occupied state output",
+    },
     TYPE_HVAC: {
         "heating": "To Zone Valve or Boiler",
         "cooling": "To Damper or AC",
