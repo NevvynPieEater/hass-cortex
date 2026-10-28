@@ -11,7 +11,9 @@ The Cortex Web API is undocumented. This integration is built from captured repl
 - Lights (on / off)
 - Motorised blinds (open / close / stop, with position and open/closed state)
 - On/off loads such as sockets
-- Temperature sensors
+- Temperature and humidity sensors
+- Door, motion and property presence (occupancy) sensors
+- Boiler, heat zone, HVAC and fan state
 - Config flow (UI setup), reconfigure and polling-interval option
 - Rooms become Home Assistant devices, so entities are named like `light.kitchen_main_lights`
 - Diagnostics download (login and address redacted)
@@ -25,9 +27,18 @@ The Cortex Web API is undocumented. This integration is built from captured repl
 | Light | `light` | Read and control verified on a real system |
 | OnOffLoad | `switch` | Read verified, commands not yet tried live |
 | MotorControl | `cover` | Read verified (State 100 = open, analogue = % open); commands not yet tried live |
-| Temperature | `sensor` | Port layout not yet confirmed: needs a Cortex user that may read these objects |
+| Temperature | `sensor` (°C) | Read verified on a real system |
+| Humidity | `sensor` (%, plus a dew point sensor that is disabled by default) | Read verified |
+| LightLevel | `sensor` (raw value, unit unconfirmed) and a `binary_sensor` "Dark" | Read verified |
+| Door | `binary_sensor` (door) | Read verified. Assumes `Door output state` 100 = open |
+| Motion | `binary_sensor` (motion) | Read verified |
+| House | `binary_sensor` (occupancy), vacant mode, unoccupied over 24 hours | Read verified |
+| Boiler, HeatZone, FanControl | `binary_sensor` (running / heat) | Read verified |
+| HVAC | heating and cooling demand `binary_sensor`s, set-point `sensor`s | Read verified |
 
-Tested with a mock Cortex built from real replies (26 automated tests) on Home Assistant 2026.2.3.
+Intercom and button panels (`Buttons122`) are not exposed yet.
+
+Tested with a mock Cortex built from real replies (30 automated tests) on Home Assistant 2026.2.3.
 Not yet run against a live Cortex from inside Home Assistant.
 
 ---
@@ -52,7 +63,7 @@ Needs Home Assistant 2024.11 or newer.
 
 1. You need the Cortex Web Server and Cortex Mobile licences.
 2. Create a user for Home Assistant on the Web Server object (Behaviour, Authorised Users).
-3. Give that user access to each object you want in Home Assistant: view for sensors, view and control for lights, blinds and sockets.
+3. Give that user access to each object you want in Home Assistant: view for sensors, doors and motion, view and control for lights, blinds and sockets.
 
 Note: Cortex does not ask for a login. A wrong or missing login is treated as an anonymous user that can list
 objects but not open them.

@@ -19,7 +19,6 @@ from .api import (
     CortexConnectionError,
     CortexError,
     CortexObject,
-    CortexPort,
 )
 from .const import (
     COMMAND_PORTS,
@@ -28,7 +27,6 @@ from .const import (
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
     STATE_PORTS,
-    TYPE_TEMPERATURE,
 )
 
 if TYPE_CHECKING:
@@ -52,26 +50,6 @@ class SupportedObject:
     def id(self) -> str:
         """Return the Cortex object id."""
         return self.obj.id
-
-
-def find_temperature_port(ports: dict[str, CortexPort]) -> str | None:
-    """Choose the port holding a temperature reading.
-
-    The port layout of Temperature objects has not been captured from a real
-    system yet (the test user was not permitted to read them), so this is a
-    conservative heuristic: an output port with "temp" in its name, otherwise
-    the only non-icon value output.
-    """
-    outputs = [
-        p for p in ports.values() if p.direction in ("Out", "ValueOut") and "icon" not in p.name.lower()
-    ]
-    named = [p for p in outputs if "temp" in p.name.lower()]
-    if named:
-        return named[0].name
-    value_outputs = [p for p in outputs if p.direction == "ValueOut"]
-    if len(value_outputs) == 1:
-        return value_outputs[0].name
-    return None
 
 
 class CortexCoordinator(DataUpdateCoordinator[CortexData]):
@@ -105,9 +83,7 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
         self.supported = {}
         self.skipped = {}
 
-        wanted = [
-            o for o in objects if o.type in STATE_PORTS or o.type == TYPE_TEMPERATURE
-        ]
+        wanted = [o for o in objects if o.type in STATE_PORTS]
 
         async def load(obj: CortexObject) -> None:
             try:
@@ -121,15 +97,8 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
         for obj in wanted:
             if obj.id in self.skipped:
                 continue
-            if obj.type == TYPE_TEMPERATURE:
-                port = find_temperature_port(obj.ports)
-                if port is None:
-                    self.skipped[obj.id] = "no_temperature_port"
-                    continue
-                self.supported[obj.id] = SupportedObject(obj, {"state": port})
-                continue
             state_ports = STATE_PORTS[obj.type]
-            commands = COMMAND_PORTS[obj.type]
+            commands = COMMAND_PORTS.get(obj.type, {})
             missing = [p for p in (*state_ports.values(), *commands.values()) if p not in obj.ports]
             if missing:
                 self.skipped[obj.id] = f"missing_port:{missing[0]}"

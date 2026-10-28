@@ -56,14 +56,15 @@ SOCKET_PORTS = [
     ("Set On (Output)", "Out"), ("Set Off (Output)", "Out"), ("Icon off time", "ValueOut"),
     ("Icon on time", "ValueOut"),
 ]
-# ASSUMPTION - layout of Temperature objects has not been captured yet.
-TEMPERATURE_PORTS = [("Temperature", "ValueOut"), ("Icon off time", "ValueOut")]
+# Layouts and sample values for every other type come from a real discovery run
+# (sanitised): tests/fixtures/discovery.json.
+DISCOVERY = json.loads((FIXTURES / "discovery.json").read_text())
 
 LAYOUTS = {
     "Light": LIGHT_PORTS,
     "MotorControl": BLIND_PORTS,
     "OnOffLoad": SOCKET_PORTS,
-    "Temperature": TEMPERATURE_PORTS,
+    **{t: [tuple(p) for p in ports] for t, ports in DISCOVERY["layouts"].items()},
 }
 
 BAD_HEADER = {"Content-Type": "Content-Type: application/JSON"}
@@ -77,9 +78,10 @@ class MockCortex:
         self.user = user
         self.password = password
         self.rows = json.loads((FIXTURES / "objects.json").read_text())["CortexAPI"]["CortexObject"]
+        self.rows += DISCOVERY["rows"]
         self.by_id = {r["IDNumber"]: r for r in self.rows}
-        # Types the test user may open. Temperatures are blocked, as in the capture.
-        self.blocked_types: set[str] = {"Temperature"}
+        # Types the test user may open (tests add e.g. "Temperature" to simulate a refusal).
+        self.blocked_types: set[str] = set()
         self.state: dict[str, dict[str, str]] = {}
         for r in self.rows:
             t = r["ControlObjectType"]
@@ -91,8 +93,8 @@ class MockCortex:
                     "Set State (Output) Analogue": "33.7424270131371",
                     "Busy": "0",
                 }
-            elif t == "Temperature":
-                self.state[r["IDNumber"]] = {"Temperature": "21.5"}
+            elif r["IDNumber"] in DISCOVERY["values"]:
+                self.state[r["IDNumber"]] = dict(DISCOVERY["values"][r["IDNumber"]])
         self.requests: list[tuple[str, str]] = []
         self.runner: web.AppRunner | None = None
         self.port = 0

@@ -13,7 +13,13 @@ from .api import CortexClient, CortexError
 from .const import CONF_SSL, CONF_VERIFY_SSL, DOMAIN
 from .coordinator import CortexCoordinator
 
-PLATFORMS = [Platform.LIGHT, Platform.SWITCH, Platform.COVER, Platform.SENSOR]
+PLATFORMS = [
+    Platform.BINARY_SENSOR,
+    Platform.COVER,
+    Platform.LIGHT,
+    Platform.SENSOR,
+    Platform.SWITCH,
+]
 
 type CortexConfigEntry = ConfigEntry[CortexCoordinator]
 

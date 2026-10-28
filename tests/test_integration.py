@@ -142,10 +142,13 @@ async def test_entities_created(hass: HomeAssistant, cortex) -> None:
     assert len(hass.states.async_all("light")) == 21
     assert len(hass.states.async_all("cover")) == 13
     assert len(hass.states.async_all("switch")) == 1
-    # Temperature objects are refused for this user, as on the real system.
-    assert len(hass.states.async_all("sensor")) == 0
+    # 18 temperatures + humidity + light level + 2 HVAC set-points
+    # (the dew point sensor is disabled by default)
+    assert len(hass.states.async_all("sensor")) == 22
+    # 6 doors, 1 motion, 3 property presence, 1 dark, 4 boiler, 2 heat zone, 1 fan, 2 HVAC
+    assert len(hass.states.async_all("binary_sensor")) == 20
     coordinator = entry.runtime_data
-    assert sum(r == "no_permission" for r in coordinator.skipped.values()) == 9
+    assert not coordinator.skipped
 
 
 async def test_friendly_names_and_devices(hass: HomeAssistant, cortex) -> None:
@@ -213,17 +216,78 @@ async def test_cover_commands_and_raw_attributes(hass: HomeAssistant, cortex) ->
     assert await hass.config_entries.async_unload(entry.entry_id)  # cancels timers
 
 
-async def test_temperature_sensors_when_permitted(hass: HomeAssistant, cortex) -> None:
-    # ASSUMES a "Temperature[ValueOut]" port: the real layout is not captured yet.
-    cortex.blocked_types = set()
+async def test_temperature_sensors(hass: HomeAssistant, cortex) -> None:
     entry = await setup_entry(hass, cortex)
-    sensors = hass.states.async_all("sensor")
-    assert len(sensors) == 9
     state = hass.states.get(entity_id_for(hass, entry, "82", "sensor"))
-    assert state.state == "21.5"
+    assert float(state.state) == pytest.approx(19.8, abs=0.05)
     assert state.attributes["unit_of_measurement"] == "°C"
     assert state.attributes["device_class"] == "temperature"
     assert state.attributes["friendly_name"] == "Kitchen Temperature"
+    # one of the sensors that were refused before the user was given access
+    outdoors = hass.states.get(entity_id_for(hass, entry, "855", "sensor"))
+    assert float(outdoors.state) == pytest.approx(9.8, abs=0.05)
+
+
+async def test_temperature_refused_is_skipped(hass: HomeAssistant, cortex) -> None:
+    cortex.blocked_types = {"Temperature"}
+    entry = await setup_entry(hass, cortex)
+    registry = er.async_get(hass)
+    assert registry.async_get_entity_id("sensor", DOMAIN, f"{entry.entry_id}_82") is None
+    assert len(hass.states.async_all("sensor")) == 4  # humidity, light level, 2 HVAC set-points
+    assert sum(r == "no_permission" for r in entry.runtime_data.skipped.values()) == 18
+
+
+async def test_humidity_light_level_and_hvac(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    humidity = hass.states.get(entity_id_for(hass, entry, "83", "sensor"))
+    assert float(humidity.state) == 59
+    assert humidity.attributes["device_class"] == "humidity"
+    registry = er.async_get(hass)
+    dew = registry.async_get(
+        registry.async_get_entity_id("sensor", DOMAIN, f"{entry.entry_id}_83_dewpoint")
+    )
+    assert dew.disabled_by is er.RegistryEntryDisabler.INTEGRATION
+    level = hass.states.get(entity_id_for(hass, entry, "88", "sensor"))
+    assert level.state == "0.0"
+    heating = hass.states.get(
+        registry.async_get_entity_id("sensor", DOMAIN, f"{entry.entry_id}_615_heating_setpoint")
+    )
+    assert float(heating.state) == 12
+    assert heating.attributes["friendly_name"] == "Lounge HVAC Heating set-point"
+
+
+async def test_doors_motion_and_presence(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    french = hass.states.get(entity_id_for(hass, entry, "1107", "binary_sensor"))
+    assert french.state == STATE_ON  # Door output state 100
+    assert french.attributes["device_class"] == "door"
+    assert french.attributes["friendly_name"] == "Dining room French door"
+    assert french.attributes["cortex_fault"] == "0"
+    front = hass.states.get(entity_id_for(hass, entry, "336", "binary_sensor"))
+    assert front.state == STATE_OFF
+    assert front.attributes["friendly_name"] == "Hall Front Door"
+    # double space in "Dining room Door  3" is collapsed
+    door3 = hass.states.get(entity_id_for(hass, entry, "1099", "binary_sensor"))
+    assert door3.attributes["friendly_name"] == "Dining room Door 3"
+
+    motion = hass.states.get(entity_id_for(hass, entry, "85", "binary_sensor"))
+    assert motion.state == STATE_OFF
+    assert motion.attributes["device_class"] == "motion"
+
+    # The "House" object shares the device of the property's outdoor lights.
+    presence = hass.states.get(entity_id_for(hass, entry, "20", "binary_sensor"))
+    assert presence.state == STATE_ON
+    assert presence.attributes["device_class"] == "occupancy"
+    assert presence.attributes["friendly_name"] == "Outside Presence"
+    light = er.async_get(hass).async_get(entity_id_for(hass, entry, "550", "light"))
+    house = er.async_get(hass).async_get(presence.entity_id)
+    assert light.device_id == house.device_id
+
+
+async def test_boiler_fan_and_heat_zone(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    for object_id in ("452", "617", "946", "470"):
+        assert hass.states.get(entity_id_for(hass, entry, object_id, "binary_sensor")).state == STATE_OFF
 
 
 async def test_command_error_is_reported(hass: HomeAssistant, cortex) -> None:
@@ -268,6 +332,6 @@ async def test_diagnostics_redacts_credentials(hass: HomeAssistant, cortex) -> N
     assert "127.0.0.1" not in text
     assert diag["entry"][CONF_PASSWORD] == "**REDACTED**"
     assert diag["object_counts"]["Light"] == 21
-    assert len(diag["supported"]) == 35
-    assert len(diag["skipped"]) == 9
+    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1
+    assert diag["skipped"] == {}
     assert any("Turn On" in line for line in diag["port_layouts"]["Light"])

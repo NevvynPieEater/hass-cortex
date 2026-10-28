@@ -18,7 +18,7 @@ def slugify_part(value: str) -> str:
 
 def entity_name(item: SupportedObject) -> str:
     """Return the entity name without repeating the room (device) name."""
-    name = item.obj.name
+    name = " ".join(item.obj.name.split())  # collapse stray double spaces
     parent = item.obj.parent
     if parent and len(name) > len(parent) + 1 and name.lower().startswith(parent.lower() + " "):
         name = name[len(parent) + 1 :]
@@ -30,14 +30,26 @@ class CortexEntity(CoordinatorEntity[CortexCoordinator]):
 
     _attr_has_entity_name = True
 
-    def __init__(self, coordinator: CortexCoordinator, item: SupportedObject) -> None:
-        """Initialise."""
+    def __init__(
+        self, coordinator: CortexCoordinator, item: SupportedObject, role: str | None = None
+    ) -> None:
+        """Initialise.
+
+        ``role`` is only used by objects that expose several entities (for
+        example humidity + dew point); the first entity keeps the plain
+        ``<entry>_<object id>`` unique id so existing entities are unchanged.
+        """
         super().__init__(coordinator)
         self._item = item
+        self._role = role or "state"
         entry_id = coordinator.config_entry.entry_id
-        self._attr_unique_id = f"{entry_id}_{item.id}"
+        self._attr_unique_id = (
+            f"{entry_id}_{item.id}" if role is None else f"{entry_id}_{item.id}_{role}"
+        )
         self._attr_name = entity_name(item)
-        parent = item.obj.parent or "Cortex"
+        # The "House" object sits under the pseudo-parent "World": use its own
+        # name so it shares a device with the property's outdoor lights.
+        parent = (item.obj.name if item.obj.type == "House" else item.obj.parent) or "Cortex"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, f"{entry_id}_room_{slugify_part(parent)}")},
             name=parent,
@@ -50,6 +62,11 @@ class CortexEntity(CoordinatorEntity[CortexCoordinator]):
     def values(self) -> dict[str, str]:
         """Return the latest raw values for this object."""
         return (self.coordinator.data or {}).get(self._item.id, {})
+
+    @property
+    def value(self) -> str | None:
+        """Return the raw value for this entity's port role."""
+        return self.values.get(self._role)
 
     @property
     def available(self) -> bool:

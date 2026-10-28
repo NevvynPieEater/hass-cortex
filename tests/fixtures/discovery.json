@@ -1,0 +1,1233 @@
+{
+ "rows": [
+  {
+   "ControlObjectType": "House",
+   "FriendlyName": "Outside",
+   "IDNumber": "20",
+   "RefImage": "1",
+   "Parent": "World",
+   "Prompt.Display.Name": "Outside",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Buttons122",
+   "FriendlyName": "Kitchen Buttons",
+   "IDNumber": "81",
+   "RefImage": "136",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Kitchen Buttons",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Humidity",
+   "FriendlyName": "Kitchen Humidity",
+   "IDNumber": "83",
+   "RefImage": "84",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Kitchen Humidity",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Intercom",
+   "FriendlyName": "Kitchen Intercom",
+   "IDNumber": "84",
+   "RefImage": "14",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Kitchen Intercom",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Motion",
+   "FriendlyName": "Kitchen Motion",
+   "IDNumber": "85",
+   "RefImage": "6",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Kitchen Motion",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "FanControl",
+   "FriendlyName": "Kitchen Fan",
+   "IDNumber": "470",
+   "RefImage": "151",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Kitchen Fan",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "LightLevel",
+   "FriendlyName": "Kitchen LightLevel",
+   "IDNumber": "88",
+   "RefImage": "15",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Kitchen LightLevel",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Boiler",
+   "FriendlyName": "Boiler",
+   "IDNumber": "452",
+   "RefImage": "9",
+   "Parent": "Garage",
+   "Prompt.Display.Name": "Boiler",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Garage Temperature",
+   "IDNumber": "203",
+   "RefImage": "5",
+   "Parent": "Garage",
+   "Prompt.Display.Name": "Garage Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Door",
+   "FriendlyName": "Garage Roller Shutter",
+   "IDNumber": "207",
+   "RefImage": "4",
+   "Parent": "Garage",
+   "Prompt.Display.Name": "Garage Roller Shutter",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Boiler",
+   "FriendlyName": "Boiler pump",
+   "IDNumber": "617",
+   "RefImage": "9",
+   "Parent": "Garage",
+   "Prompt.Display.Name": "Boiler pump",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Door",
+   "FriendlyName": "Front Door",
+   "IDNumber": "336",
+   "RefImage": "4",
+   "Parent": "Hall",
+   "Prompt.Display.Name": "Front Door",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Door",
+   "FriendlyName": "Folding Door",
+   "IDNumber": "253",
+   "RefImage": "4",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Folding Door",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "3",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Door",
+   "FriendlyName": "Garage Door 1",
+   "IDNumber": "955",
+   "RefImage": "4",
+   "Parent": "Kitchen",
+   "Prompt.Display.Name": "Garage Door 1",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "5",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "HeatZone",
+   "FriendlyName": "Garage Heat Zone 3",
+   "IDNumber": "946",
+   "RefImage": "11",
+   "Parent": "Garage",
+   "Prompt.Display.Name": "Garage Heat Zone 3",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "HVAC",
+   "FriendlyName": "Lounge HVAC",
+   "IDNumber": "615",
+   "RefImage": "83",
+   "Parent": "Lounge",
+   "Prompt.Display.Name": "Lounge HVAC",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1",
+   "PaintString": "19.89   ",
+   "ReportString": "H = 12.00C, T = 19.89C, C = 25.00C, T = 19.89C.\n",
+   "ShowInside": "1",
+   "ShowOutside": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Hall Temperature",
+   "IDNumber": "127",
+   "RefImage": "5",
+   "Parent": "Hall",
+   "Prompt.Display.Name": "Hall Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Door",
+   "FriendlyName": "Dining room Door  3",
+   "IDNumber": "1099",
+   "RefImage": "4",
+   "Parent": "Dining room",
+   "Prompt.Display.Name": "Dining room Door  3",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "3",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Dining room Temperature",
+   "IDNumber": "1104",
+   "RefImage": "5",
+   "Parent": "Dining room",
+   "Prompt.Display.Name": "Dining room Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Door",
+   "FriendlyName": "Dining room french door",
+   "IDNumber": "1107",
+   "RefImage": "4",
+   "Parent": "Dining room",
+   "Prompt.Display.Name": "Dining room french door",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "5",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Garage 1 Temperature",
+   "IDNumber": "855",
+   "RefImage": "5",
+   "Parent": "Garage 1",
+   "Prompt.Display.Name": "Garage 1 Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Garage 2 Temperature",
+   "IDNumber": "825",
+   "RefImage": "5",
+   "Parent": "Garage 2",
+   "Prompt.Display.Name": "Garage 2 Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Garage 3 Temperature",
+   "IDNumber": "630",
+   "RefImage": "5",
+   "Parent": "Garage 3",
+   "Prompt.Display.Name": "Garage 3 Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "Brick Shed Temperature",
+   "IDNumber": "700",
+   "RefImage": "5",
+   "Parent": "Brick Shed",
+   "Prompt.Display.Name": "Brick Shed Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "machine shop Temperature",
+   "IDNumber": "1022",
+   "RefImage": "5",
+   "Parent": "machine shop",
+   "Prompt.Display.Name": "machine shop Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "Temperature",
+   "FriendlyName": "carport Temperature",
+   "IDNumber": "1013",
+   "RefImage": "5",
+   "Parent": "carport",
+   "Prompt.Display.Name": "carport Temperature",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
+  }
+ ],
+ "layouts": {
+  "House": [
+   [
+    "Not used",
+    "In"
+   ],
+   [
+    "Presence state output",
+    "Out"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "On occupied",
+    "Out"
+   ],
+   [
+    "On unoccupied",
+    "Out"
+   ],
+   [
+    "Unoccupied > 24Hrs state output",
+    "Out"
+   ],
+   [
+    "Vacant state output",
+    "Out"
+   ],
+   [
+    "On Public IP Address change",
+    "Out"
+   ],
+   [
+    "On Public IP Address seek error",
+    "Out"
+   ],
+   [
+    "Set Vacant",
+    "In"
+   ],
+   [
+    "Clear Vacant",
+    "In"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "Temperature": [
+   [
+    "Temperature Output",
+    "ValueOut"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Speak Min Max local",
+    "In"
+   ],
+   [
+    "Speak Min Max broadcast",
+    "In"
+   ],
+   [
+    "Temperature Differential",
+    "ValueOut"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "Display Min Max local",
+    "In"
+   ],
+   [
+    "Display Min Max broadcast",
+    "In"
+   ],
+   [
+    "Compensation Sensor",
+    "ValueIn"
+   ],
+   [
+    "Alternative temperature source",
+    "ValueIn"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ],
+   [
+    "kitchen blind shade trigger out",
+    "Out"
+   ],
+   [
+    "kitchen blind shade state out",
+    "Out"
+   ]
+  ],
+  "Humidity": [
+   [
+    "Humidity Output",
+    "ValueOut"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Speak Min Max local",
+    "In"
+   ],
+   [
+    "Speak Min Max broadcast",
+    "In"
+   ],
+   [
+    "Dewpoint Output",
+    "ValueOut"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "Display Min Max local",
+    "In"
+   ],
+   [
+    "Display Min Max broadcast",
+    "In"
+   ],
+   [
+    "Humidity Differential Output",
+    "ValueOut"
+   ],
+   [
+    "Alternative humidity source",
+    "ValueIn"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "Motion": [
+   [
+    "Output",
+    "Out"
+   ],
+   [
+    "Alternative motion source",
+    "In"
+   ],
+   [
+    "Block the output",
+    "In"
+   ],
+   [
+    "Long motion sense output",
+    "Out"
+   ],
+   [
+    "Fault",
+    "Out"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "FanControl": [
+   [
+    "Room presence input",
+    "In"
+   ],
+   [
+    "Temperature input",
+    "ValueIn"
+   ],
+   [
+    "Humidity source",
+    "ValueIn"
+   ],
+   [
+    "Humidity reference",
+    "ValueIn"
+   ],
+   [
+    "Other input",
+    "In"
+   ],
+   [
+    "Toggle",
+    "In"
+   ],
+   [
+    "Set State (Output)",
+    "Out"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "Block on state",
+    "In"
+   ],
+   [
+    "Dewpoint reference temperature",
+    "ValueIn"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "LightLevel": [
+   [
+    "Light Level Output",
+    "ValueOut"
+   ],
+   [
+    "Dark Output",
+    "Out"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Speak min max local",
+    "In"
+   ],
+   [
+    "Speak min max broadcast",
+    "In"
+   ],
+   [
+    "Light Level Differential",
+    "ValueOut"
+   ],
+   [
+    "On Going Dark Output",
+    "Out"
+   ],
+   [
+    "On Going Bright Output",
+    "Out"
+   ],
+   [
+    "Alternative Light Level source",
+    "ValueIn"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "Boiler": [
+   [
+    "Input from Heat Zones or Radiator or HVAC",
+    "In"
+   ],
+   [
+    "Demand for extra heating",
+    "Out"
+   ],
+   [
+    "Set State (Output)",
+    "ValueOut"
+   ],
+   [
+    "Triggered when turned On",
+    "Out"
+   ],
+   [
+    "Triggered when turned Off",
+    "Out"
+   ],
+   [
+    "Triggered when changed",
+    "Out"
+   ],
+   [
+    "Inhibit operation",
+    "In"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "Door": [
+   [
+    "Door opens out from",
+    "Association"
+   ],
+   [
+    "Door opens into",
+    "Association"
+   ],
+   [
+    "Door output state",
+    "Out"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Trigger on door open",
+    "Out"
+   ],
+   [
+    "Trigger on door closed",
+    "Out"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "Proximity detector (input)",
+    "In"
+   ],
+   [
+    "Alternative switch source",
+    "In"
+   ],
+   [
+    "Fault",
+    "Out"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "HeatZone": [
+   [
+    "Inhibit operation",
+    "In"
+   ],
+   [
+    "On Set True",
+    "Out"
+   ],
+   [
+    "On Set False",
+    "Out"
+   ],
+   [
+    "Speak local",
+    "In"
+   ],
+   [
+    "Speak broadcast",
+    "In"
+   ],
+   [
+    "Display local",
+    "In"
+   ],
+   [
+    "Display broadcast",
+    "In"
+   ],
+   [
+    "Input from HVAC",
+    "In"
+   ],
+   [
+    "Output To Boiler",
+    "Out"
+   ],
+   [
+    "Set State (Output)",
+    "Out"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ],
+  "HVAC": [
+   [
+    "Room Temp Input",
+    "ValueIn"
+   ],
+   [
+    "Outside Temp Input",
+    "ValueIn"
+   ],
+   [
+    "From Room Presence",
+    "In"
+   ],
+   [
+    "Disable Input",
+    "In"
+   ],
+   [
+    "Presence Override",
+    "In"
+   ],
+   [
+    "Speak",
+    "In"
+   ],
+   [
+    "Mode Off",
+    "In"
+   ],
+   [
+    "Mode Heating",
+    "In"
+   ],
+   [
+    "Mode Cooling",
+    "In"
+   ],
+   [
+    "Mode Auto",
+    "In"
+   ],
+   [
+    "Heating Increase setting",
+    "In"
+   ],
+   [
+    "Heating Reduce setting",
+    "In"
+   ],
+   [
+    "Heating Increase temperature",
+    "In"
+   ],
+   [
+    "Heating Reduce temperature",
+    "In"
+   ],
+   [
+    "Heating Normal setting",
+    "In"
+   ],
+   [
+    "Fall Back Enable",
+    "In"
+   ],
+   [
+    "Fall Back Disable",
+    "In"
+   ],
+   [
+    "To Zone Valve or Boiler",
+    "Out"
+   ],
+   [
+    "To Damper or AC",
+    "Out"
+   ],
+   [
+    "Cooling Increase setting",
+    "In"
+   ],
+   [
+    "Cooling Reduce setting",
+    "In"
+   ],
+   [
+    "Cooling Increase temperature",
+    "In"
+   ],
+   [
+    "Cooling Reduce temperature",
+    "In"
+   ],
+   [
+    "Cooling Normal setting",
+    "In"
+   ],
+   [
+    "d(InsideTemp)/dt",
+    "ValueOut"
+   ],
+   [
+    "Heating SetPoint-InsideTemp",
+    "ValueOut"
+   ],
+   [
+    "Heating SetPoint-OutsideTemp",
+    "ValueOut"
+   ],
+   [
+    "Heating Integral(SetPoint-InsideTemp)",
+    "ValueOut"
+   ],
+   [
+    "Cooling SetPoint-InsideTemp",
+    "ValueOut"
+   ],
+   [
+    "Cooling SetPoint-OutsideTemp",
+    "ValueOut"
+   ],
+   [
+    "Cooling Integral(SetPoint-InsideTemp)",
+    "ValueOut"
+   ],
+   [
+    "Heating temporary change Set-point value",
+    "ValueIn"
+   ],
+   [
+    "Cooling temporary change Set-point value",
+    "ValueIn"
+   ],
+   [
+    "Status changed",
+    "Out"
+   ],
+   [
+    "Heating temporary Edit Set-point (using LCD)",
+    "In"
+   ],
+   [
+    "Cooling temporary Edit Set-point (using LCD)",
+    "In"
+   ],
+   [
+    "To Supplementary heat source",
+    "Out"
+   ],
+   [
+    "To Supplementary cooling source",
+    "Out"
+   ],
+   [
+    "Status request",
+    "In"
+   ],
+   [
+    "Fall Back Toggle",
+    "In"
+   ],
+   [
+    "Configure and Activate Menu",
+    "In"
+   ],
+   [
+    "Set-point confirmation",
+    "ValueIn"
+   ],
+   [
+    "Trigger heating demand for run-on period",
+    "In"
+   ],
+   [
+    "Trigger cooling demand for run-on period",
+    "In"
+   ],
+   [
+    "Heating User Offset (Output)",
+    "ValueOut"
+   ],
+   [
+    "Cooling User Offset (Output)",
+    "ValueOut"
+   ],
+   [
+    "Heating Setpoint (Output)",
+    "ValueOut"
+   ],
+   [
+    "Cooling Setpoint (Output)",
+    "ValueOut"
+   ],
+   [
+    "Force Heating change state",
+    "In"
+   ],
+   [
+    "Force Cooling change state",
+    "In"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
+  ]
+ },
+ "values": {
+  "20": {
+   "Presence state output": "100",
+   "On occupied": "100",
+   "On unoccupied": "100",
+   "Unoccupied > 24Hrs state output": "0",
+   "Vacant state output": "0",
+   "On Public IP Address change": "100",
+   "On Public IP Address seek error": "100",
+   "Icon off time": "46321.5096316319",
+   "Icon on time": "46321.5302859375"
+  },
+  "82": {
+   "Temperature Output": "19.81640625",
+   "Temperature Differential": "0.636270454851509",
+   "Icon off time": "0",
+   "Icon on time": "0",
+   "kitchen blind shade trigger out": "0",
+   "kitchen blind shade state out": "0"
+  },
+  "83": {
+   "Humidity Output": "59",
+   "Dewpoint Output": "11.5774465419155",
+   "Humidity Differential Output": "-3.58978011017424",
+   "Icon off time": "46297.7257948727",
+   "Icon on time": "46297.794123287"
+  },
+  "85": {
+   "Output": "0",
+   "Long motion sense output": "0",
+   "Fault": "0",
+   "Icon off time": "46323.0000161806",
+   "Icon on time": "46322.9998738542"
+  },
+  "470": {
+   "Set State (Output)": "0",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "88": {
+   "Light Level Output": "0",
+   "Dark Output": "100",
+   "Light Level Differential": "-1.45502818190132E-6",
+   "On Going Dark Output": "100",
+   "On Going Bright Output": "0",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "452": {
+   "Demand for extra heating": "0",
+   "Set State (Output)": "0",
+   "Triggered when turned On": "0",
+   "Triggered when turned Off": "0",
+   "Triggered when changed": "0",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "203": {
+   "Temperature Output": "15.375",
+   "Temperature Differential": "-0.038490928323392",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "207": {
+   "Door output state": "0",
+   "Trigger on door open": "0",
+   "Trigger on door closed": "0",
+   "Fault": "0",
+   "Icon off time": "46296.7813911806",
+   "Icon on time": "46296.7809455671"
+  },
+  "617": {
+   "Demand for extra heating": "0",
+   "Set State (Output)": "0",
+   "Triggered when turned On": "0",
+   "Triggered when turned Off": "0",
+   "Triggered when changed": "0",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "336": {
+   "Door output state": "0",
+   "Trigger on door open": "0",
+   "Trigger on door closed": "0",
+   "Fault": "0",
+   "Icon off time": "46322.6882901968",
+   "Icon on time": "46322.6882262269"
+  },
+  "253": {
+   "Door output state": "0",
+   "Trigger on door open": "0",
+   "Trigger on door closed": "0",
+   "Fault": "0",
+   "Icon off time": "46322.5461636806",
+   "Icon on time": "46322.5461155556"
+  },
+  "955": {
+   "Door output state": "0",
+   "Trigger on door open": "0",
+   "Trigger on door closed": "0",
+   "Fault": "0",
+   "Icon off time": "46296.7832047338",
+   "Icon on time": "46296.7809459375"
+  },
+  "946": {
+   "On Set True": "0",
+   "On Set False": "0",
+   "Output To Boiler": "0",
+   "Set State (Output)": "0",
+   "Icon off time": "46320.3024791088",
+   "Icon on time": "46320.3022057639"
+  },
+  "117": {
+   "Temperature Output": "18.41796875",
+   "Temperature Differential": "-0.114793964399775",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "134": {
+   "Temperature Output": "19.96875",
+   "Temperature Differential": "1.23257827746547",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "615": {
+   "To Zone Valve or Boiler": "0",
+   "To Damper or AC": "0",
+   "d(InsideTemp)/dt": "0.933529332833292",
+   "Heating SetPoint-InsideTemp": "-7.892578125",
+   "Heating SetPoint-OutsideTemp": "4.703125",
+   "Heating Integral(SetPoint-InsideTemp)": "0",
+   "Cooling SetPoint-InsideTemp": "5.107421875",
+   "Cooling SetPoint-OutsideTemp": "17.703125",
+   "Cooling Integral(SetPoint-InsideTemp)": "198.846653629942",
+   "Status changed": "0",
+   "To Supplementary heat source": "0",
+   "To Supplementary cooling source": "0",
+   "Heating User Offset (Output)": "0",
+   "Cooling User Offset (Output)": "0",
+   "Heating Setpoint (Output)": "12",
+   "Cooling Setpoint (Output)": "25",
+   "Icon off time": "46320.3024791088",
+   "Icon on time": "46320.3022057639"
+  },
+  "127": {
+   "Temperature Output": "19.1875",
+   "Temperature Differential": "0.1551737012109",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "1099": {
+   "Door output state": "0",
+   "Trigger on door open": "0",
+   "Trigger on door closed": "0",
+   "Fault": "0",
+   "Icon off time": "46321.7357586227",
+   "Icon on time": "46321.7356983681"
+  },
+  "1104": {
+   "Temperature Output": "16.78515625",
+   "Temperature Differential": "-0.271990254007335",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "1107": {
+   "Door output state": "100",
+   "Trigger on door open": "100",
+   "Trigger on door closed": "100",
+   "Fault": "0",
+   "Icon off time": "46319.34544125",
+   "Icon on time": "46319.6587807292"
+  },
+  "280": {
+   "Temperature Output": "18.87890625",
+   "Temperature Differential": "0.0374801966988976",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "235": {
+   "Temperature Output": "17.96875",
+   "Temperature Differential": "0.0236937793272892",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "212": {
+   "Temperature Output": "18.91796875",
+   "Temperature Differential": "0.0483618272536864",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "227": {
+   "Temperature Output": "18.15625",
+   "Temperature Differential": "0.0858440783223077",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "218": {
+   "Temperature Output": "18.4375",
+   "Temperature Differential": "0.0925005802960546",
+   "Icon off time": "0",
+   "Icon on time": "0",
+   "temperature for blinds trigger out": "0",
+   "temperature for blinds state out": "0"
+  },
+  "190": {
+   "Temperature Output": "7.2578125",
+   "Temperature Differential": "-0.89646990731405",
+   "Icon off time": "0",
+   "Icon on time": "0",
+   "Threshold 1 trigger out": "0",
+   "Threshold 1 state out": "0"
+  },
+  "855": {
+   "Temperature Output": "9.77734375",
+   "Temperature Differential": "-0.264966987113392",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "825": {
+   "Temperature Output": "9.5390625",
+   "Temperature Differential": "-0.106572922409468",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "630": {
+   "Temperature Output": "9.7578125",
+   "Temperature Differential": "-0.200004392832862",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "700": {
+   "Temperature Output": "9.81640625",
+   "Temperature Differential": "-0.158841428562456",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "1022": {
+   "Temperature Output": "10.55859375",
+   "Temperature Differential": "-0.191985524064847",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  },
+  "1013": {
+   "Temperature Output": "8.98828125",
+   "Temperature Differential": "-0.260301708868213",
+   "Icon off time": "0",
+   "Icon on time": "0"
+  }
+ }
+}
