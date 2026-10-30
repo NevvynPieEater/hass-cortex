@@ -2,7 +2,7 @@
 
 Read and control an [Idratek Cortex](https://www.idratek.com) home automation system from Home Assistant, locally.
 
-The Cortex Web API is undocumented. This integration is built from captured replies of a real installation.
+This integration is built from captured replies of a real installation, checked against the Web API pages of the Cortex help file (version 27). The port is whatever is set on the Cortex Web Server object.
 
 ---
 
@@ -81,10 +81,10 @@ Settings → Devices & Services → Add Integration → Idratek Cortex
 You will need:
 
 - The address of the Cortex PC as seen from Home Assistant (e.g. `192.168.1.50`)
-- The web server port (HTTP is commonly `8000`; HTTPS on `443` uses a self-signed certificate, so leave certificate checking off)
+- The web server port, as set on the Cortex Web Server object (this installation uses `8000` for HTTP; HTTPS on `443` uses a self-signed certificate, so leave certificate checking off)
 - The Cortex Web API username and password
 
-If you change permissions in Cortex, reload the integration to pick them up.
+Cortex only lists an object once it is exposed to the API. In Cortex, right-click the object, choose Idranet sharing and tick Cortex API, then give your web user access under Web Server, Authorised Users, Access Rights (Web enabled and Web API). If you change permissions in Cortex, reload the integration to pick them up.
 
 ---
 
@@ -93,7 +93,7 @@ If you change permissions in Cortex, reload the integration to pick them up.
 - Polls every 30 seconds by default (5 seconds minimum, set in the integration options). Roughly 70 small requests per cycle.
 - Cortex reports problems inside normal replies (for example `401 USER x not permitted...`). These show as unavailable entities or as an error when a button is pressed.
 - The login is sent as HTTP Basic. Use HTTPS if the network is not trusted.
-- Not built yet: webhook push updates, floors, setting a blind to a specific position.
+- Not built yet: webhook push updates (Cortex's Web API Client object can POST to a Home Assistant webhook), a generic service to trigger any input port, floors, setting a blind to a specific position.
 
 ---
 

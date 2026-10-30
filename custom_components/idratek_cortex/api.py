@@ -1,7 +1,8 @@
 """Client for the Idratek Cortex Web API.
 
-The Cortex API is undocumented. Everything here is derived from captured
-responses of a real installation:
+The behaviour below was derived from captured responses of a real installation and
+checked against the Web API pages of the Cortex 27 help file (which gives the
+resource names and port-set syntax but not the quirks of the replies):
 
 * Object list:   GET  /api/v1/Objects.json/            -> JSON
 * Port list:     GET  /api/v1/Objects/<id>              -> text, "ListObjectPort ..." lines
