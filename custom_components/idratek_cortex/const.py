@@ -100,3 +100,5 @@ COMMAND_PORTS: dict[str, dict[str, str]] = {
 
 # Seconds after a blind command at which its state is read again.
 BLIND_REFRESH_DELAYS = (10, 30)
+
+CONF_WEBHOOK_ID = "webhook_id"

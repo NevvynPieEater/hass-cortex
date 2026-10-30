@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from homeassistant.components import webhook
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME, Platform
 from homeassistant.core import HomeAssistant
@@ -10,7 +11,8 @@ from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import CortexClient, CortexError
-from .const import CONF_SSL, CONF_VERIFY_SSL, DOMAIN
+from . import push as cortex_push
+from .const import CONF_SSL, CONF_VERIFY_SSL, CONF_WEBHOOK_ID, DOMAIN
 from .coordinator import CortexCoordinator
 
 PLATFORMS = [
@@ -54,6 +56,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: CortexConfigEntry) -> bo
         model="Cortex",
         configuration_url=client.base_url,
     )
+
+    webhook_id = entry.data.get(CONF_WEBHOOK_ID)
+    if not webhook_id:
+        webhook_id = webhook.async_generate_id()
+        hass.config_entries.async_update_entry(entry, data={**entry.data, CONF_WEBHOOK_ID: webhook_id})
+    cortex_push.async_register(hass, entry, webhook_id)
+    entry.async_on_unload(lambda: cortex_push.async_unregister(hass, webhook_id))
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(_async_reload_on_update))

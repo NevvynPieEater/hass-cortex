@@ -40,7 +40,7 @@ This integration is built from captured replies of a real installation, checked 
 
 Button panels (`Buttons122`) become `event` entities, read by a fast 2-second poller; mapping of Cortex button numbers to physical keys is not yet confirmed. The intercom is not exposed yet.
 
-Tested with a mock Cortex built from real replies (35 automated tests) on Home Assistant 2026.2.3.
+Tested with a mock Cortex built from real replies (38 automated tests) on Home Assistant 2026.2.3.
 Not yet run against a live Cortex from inside Home Assistant.
 
 ---
@@ -88,12 +88,26 @@ Cortex only lists an object once it is exposed to the API. In Cortex, right-clic
 
 ---
 
+## Instant updates from Cortex (push)
+
+Polling is the default, but Cortex can tell Home Assistant straight away through its **Web API Client** object. Open the integration's **Configure** dialog to see the push address (`/api/webhook/<id>`; it only accepts requests from the local network).
+
+In Cortex, add an item to a Web API Client object:
+
+- Method POST (or GET), URL: the push address
+- URL key list: `object` = the Cortex object id, `port` = the output port name, `value` = the tag for that port, for example `<Driveway PIR Input  3.Output=?0>`
+- Connect the object's output port to the item's send port, and tick "Allow sending of messages" on the client
+
+Example for the driveway PIR: `object=1057`, `port=Output`, `value=<Driveway PIR Input  3.Output=?0>`, triggered by the PIR's `Output`. For a button panel use the press port, for example `port=Single Click Button 8`. One item is needed per port; Cortex cannot tell which object called it. This has not yet been tried on a live system.
+
+---
+
 ## Notes
 
 - Polls every 30 seconds by default (5 seconds minimum, set in the integration options). Roughly 70 small requests per cycle.
 - Cortex reports problems inside normal replies (for example `401 USER x not permitted...`). These show as unavailable entities or as an error when a button is pressed.
 - The login is sent as HTTP Basic. Use HTTPS if the network is not trusted.
-- Not built yet: webhook push updates (Cortex's Web API Client object can POST to a Home Assistant webhook), a generic service to trigger any input port, floors, setting a blind to a specific position.
+- Not built yet: a generic service to trigger any input port, floors, setting a blind to a specific position.
 
 ---
 

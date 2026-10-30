@@ -6,6 +6,7 @@ from typing import Any
 
 import voluptuous as vol
 
+from homeassistant.components import webhook
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult, OptionsFlow
 from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME
 from homeassistant.core import HomeAssistant, callback
@@ -24,6 +25,7 @@ from .const import (
     COMMAND_PORTS,
     CONF_BUTTON_INTERVAL,
     CONF_SCAN_INTERVAL,
+    CONF_WEBHOOK_ID,
     CONF_SSL,
     CONF_VERIFY_SSL,
     DEFAULT_PORT,
@@ -201,4 +203,13 @@ class CortexOptionsFlow(OptionsFlow):
                 )
             }
         )
-        return self.async_show_form(step_id="init", data_schema=schema)
+        webhook_id = self.config_entry.data.get(CONF_WEBHOOK_ID, "")
+        try:
+            url = webhook.async_generate_url(self.hass, webhook_id, allow_external=False)
+        except Exception:  # noqa: BLE001 - no internal URL configured
+            url = f"http://<your Home Assistant address>:8123{webhook.async_generate_path(webhook_id)}"
+        return self.async_show_form(
+            step_id="init",
+            data_schema=schema,
+            description_placeholders={"webhook_url": url},
+        )

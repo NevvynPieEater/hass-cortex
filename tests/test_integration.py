@@ -23,6 +23,7 @@ from custom_components.idratek_cortex.const import (
     CONF_SCAN_INTERVAL,
     CONF_SSL,
     CONF_VERIFY_SSL,
+    CONF_WEBHOOK_ID,
     DOMAIN,
 )
 from custom_components.idratek_cortex.diagnostics import async_get_config_entry_diagnostics
@@ -422,3 +423,60 @@ async def test_button_interval_option(hass: HomeAssistant, cortex) -> None:
     await hass.async_block_till_done()
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert entry.options["button_interval"] == 1
+
+
+# ------------------------------------------------------------- pushed values
+
+
+async def test_pushed_value_updates_pir_at_once(hass: HomeAssistant, cortex, hass_client_no_auth) -> None:
+    entry = await setup_entry(hass, cortex)
+    client = await hass_client_no_auth()
+    path = f"/api/webhook/{entry.data[CONF_WEBHOOK_ID]}"
+    entity_id = entity_id_for(hass, entry, "1057", "binary_sensor")
+    assert hass.states.get(entity_id).state == STATE_OFF
+
+    # Cortex fills the tag in with the value and may add stray characters.
+    resp = await client.post(
+        path, params={"object": "1057", "port": "Output", "value": " 100.00|"}
+    )
+    assert resp.status == 200
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_ON
+
+    # The object can also be named (stray double spaces are ignored).
+    resp = await client.get(
+        path, params={"object": "Driveway PIR Input 3", "port": "output", "value": "0"}
+    )
+    assert resp.status == 200
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_OFF
+
+
+async def test_push_rejects_bad_requests(hass: HomeAssistant, cortex, hass_client_no_auth) -> None:
+    entry = await setup_entry(hass, cortex)
+    client = await hass_client_no_auth()
+    path = f"/api/webhook/{entry.data[CONF_WEBHOOK_ID]}"
+    assert (await client.post(path, params={"object": "1057"})).status == 400
+    assert (await client.post(path, params={"object": "999999", "port": "Output", "value": "1"})).status == 404
+    assert (await client.post(path, params={"object": "1057", "port": "Nope", "value": "1"})).status == 404
+    # a body is accepted too
+    resp = await client.post(path, json={"object": "1057", "port": "Output", "value": "100"})
+    assert resp.status == 200
+
+
+async def test_pushed_button_press_fires_event(hass: HomeAssistant, cortex, hass_client_no_auth) -> None:
+    entry = await setup_entry(hass, cortex)
+    client = await hass_client_no_auth()
+    path = f"/api/webhook/{entry.data[CONF_WEBHOOK_ID]}"
+    entity_id = button_event_id(hass, entry, 8)
+    resp = await client.post(
+        path, params={"object": "81", "port": "Single Click Button 8", "value": "100"}
+    )
+    assert resp.status == 200
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).attributes["event_type"] == "single_click"
+    first = hass.states.get(entity_id).state
+    # still high / a repeat does not fire again; releasing then pressing does
+    await client.post(path, params={"object": "81", "port": "Single Click Button 8", "value": "100"})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == first

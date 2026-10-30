@@ -3,6 +3,16 @@
 All notable changes to this project are listed here. Versions below 1.0 are
 still being checked against live systems.
 
+## 0.5.0
+
+### Added
+- Instant updates pushed from Cortex. The integration now has a Home Assistant webhook
+  (address shown under Configure). A Cortex Web API Client item that calls it with
+  `object`, `port` and `value` updates the matching entity at once, for any watched
+  state port (PIRs, doors, lights, temperatures and so on). A button panel press port
+  above 0 fires that button's event. Polling carries on as a fallback. The webhook is
+  limited to the local network.
+
 ## 0.4.0
 
 ### Added

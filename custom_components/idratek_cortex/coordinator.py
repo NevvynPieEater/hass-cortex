@@ -184,6 +184,13 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
             raise UpdateFailed("Cannot reach the Cortex web server")
         return data
 
+    @callback
+    def async_push(self, object_id: str, role: str, value: str) -> None:
+        """Apply a value pushed by Cortex without waiting for the next poll."""
+        data = {**(self.data or {})}
+        data[object_id] = {**data.get(object_id, {}), role: value}
+        self.async_set_updated_data(data)
+
     async def async_refresh_object(self, object_id: str) -> None:
         """Refresh a single object and publish the result."""
         item = self.supported.get(object_id)

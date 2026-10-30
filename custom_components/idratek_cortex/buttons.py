@@ -13,7 +13,7 @@ from datetime import timedelta
 import logging
 from typing import TYPE_CHECKING
 
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import CortexClient, CortexConnectionError, CortexError
@@ -90,3 +90,12 @@ class ButtonCoordinator(DataUpdateCoordinator[dict[str, bool]]):
         )
         self._primed = True
         return high
+
+    @callback
+    def async_push(self, object_id: str, port: str, high: bool) -> None:
+        """Apply a press pushed by Cortex; a rising edge fires the button event."""
+        key = press_key(object_id, port)
+        was_high = (self.data or {}).get(key, False)
+        self.pressed = {key} if high and not was_high else set()
+        self.async_set_updated_data({**(self.data or {}), key: high})
+        self.pressed = set()
