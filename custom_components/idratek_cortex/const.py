@@ -7,9 +7,13 @@ DOMAIN = "idratek_cortex"
 CONF_SSL = "ssl"
 CONF_VERIFY_SSL = "verify_ssl"
 CONF_SCAN_INTERVAL = "scan_interval"
+CONF_BUTTON_INTERVAL = "button_interval"
 
 DEFAULT_PORT = 8000
 DEFAULT_SCAN_INTERVAL = 30  # seconds
+DEFAULT_BUTTON_INTERVAL = 2  # seconds between button polls (after the previous one ends)
+MIN_BUTTON_INTERVAL = 1
+MAX_BUTTON_INTERVAL = 60
 MIN_SCAN_INTERVAL = 5
 MAX_SCAN_INTERVAL = 3600
 
@@ -36,6 +40,16 @@ TYPE_HEAT_ZONE = "HeatZone"
 TYPE_FAN = "FanControl"
 TYPE_HVAC = "HVAC"
 TYPE_ROOM = "Room"
+TYPE_BUTTONS = "Buttons122"
+
+# Button panels: each Cortex button has momentary outputs per press type. They stay at
+# 100 for a few seconds, so a fast poll can catch them (a 30 s poll cannot).
+BUTTON_EVENT_PORTS: dict[str, str] = {
+    "single_click": "Single Click Button {n}",
+    "double_click": "Double Click Button {n}",
+    "long_press": "Long Press Button {n}",
+}
+MAX_BUTTONS = 12
 
 # Per type: which ports are read for state (role -> exact Cortex port name).
 # Port names (not numbers) are used because numeric lookups were inconsistent

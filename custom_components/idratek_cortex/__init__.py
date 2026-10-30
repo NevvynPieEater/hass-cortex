@@ -16,6 +16,7 @@ from .coordinator import CortexCoordinator
 PLATFORMS = [
     Platform.BINARY_SENSOR,
     Platform.COVER,
+    Platform.EVENT,
     Platform.LIGHT,
     Platform.SENSOR,
     Platform.SWITCH,
@@ -42,6 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: CortexConfigEntry) -> bo
     except CortexError as err:
         raise ConfigEntryNotReady(f"Cannot read objects from Cortex: {err}") from err
     await coordinator.async_config_entry_first_refresh()
+    await coordinator.async_setup_buttons()
     entry.runtime_data = coordinator
 
     dr.async_get(hass).async_get_or_create(

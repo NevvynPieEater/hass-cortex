@@ -14,7 +14,7 @@ The Cortex Web API is undocumented. This integration is built from captured repl
 - Temperature and humidity sensors
 - Door, motion and property presence (occupancy) sensors
 - Boiler, heat zone, HVAC and fan state
-- Config flow (UI setup), reconfigure and polling-interval option
+- Config flow (UI setup), reconfigure and polling-interval options
 - Rooms become Home Assistant devices, so entities are named like `light.kitchen_main_lights`
 - Diagnostics download (login and address redacted)
 
@@ -38,9 +38,9 @@ The Cortex Web API is undocumented. This integration is built from captured repl
 | Boiler, HeatZone, FanControl | `binary_sensor` (running / heat) | Read verified |
 | HVAC | heating and cooling demand `binary_sensor`s, set-point `sensor`s | Read verified |
 
-Intercom and button panels (`Buttons122`) are not exposed yet.
+Button panels (`Buttons122`) become `event` entities, read by a fast 2-second poller; mapping of Cortex button numbers to physical keys is not yet confirmed. The intercom is not exposed yet.
 
-Tested with a mock Cortex built from real replies (31 automated tests) on Home Assistant 2026.2.3.
+Tested with a mock Cortex built from real replies (35 automated tests) on Home Assistant 2026.2.3.
 Not yet run against a live Cortex from inside Home Assistant.
 
 ---

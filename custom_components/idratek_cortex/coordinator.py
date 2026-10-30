@@ -27,6 +27,9 @@ from .const import (
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
     STATE_PORTS,
+    TYPE_BUTTONS,
+    BUTTON_EVENT_PORTS,
+    MAX_BUTTONS,
 )
 
 if TYPE_CHECKING:
@@ -72,6 +75,9 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
         self.supported: dict[str, SupportedObject] = {}
         self.skipped: dict[str, str] = {}  # object id -> reason
         self.errors: dict[str, str] = {}  # object id -> last read error
+        # Button panels: object id -> button number -> event type -> port name.
+        self.buttons: dict[str, dict[int, dict[str, str]]] = {}
+        self.button_coordinator = None  # created by async_setup_buttons
         self._timers: list[CALLBACK_TYPE] = []
 
     # ------------------------------------------------------------------ discovery
@@ -83,7 +89,8 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
         self.supported = {}
         self.skipped = {}
 
-        wanted = [o for o in objects if o.type in STATE_PORTS]
+        self.buttons = {}
+        wanted = [o for o in objects if o.type in STATE_PORTS or o.type == TYPE_BUTTONS]
 
         async def load(obj: CortexObject) -> None:
             try:
@@ -96,6 +103,19 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
 
         for obj in wanted:
             if obj.id in self.skipped:
+                continue
+            if obj.type == TYPE_BUTTONS:
+                panel: dict[int, dict[str, str]] = {}
+                for number in range(1, MAX_BUTTONS + 1):
+                    ports = {
+                        event: pattern.format(n=number)
+                        for event, pattern in BUTTON_EVENT_PORTS.items()
+                        if pattern.format(n=number) in obj.ports
+                    }
+                    if ports:
+                        panel[number] = ports
+                if panel:
+                    self.buttons[obj.id] = panel
                 continue
             state_ports = STATE_PORTS[obj.type]
             commands = COMMAND_PORTS.get(obj.type, {})
@@ -112,6 +132,24 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
                 self.objects[obj_id].name,
                 reason,
             )
+
+    async def async_setup_buttons(self) -> None:
+        """Start the fast button poller when a panel was discovered."""
+        from .buttons import ButtonCoordinator
+
+        ports = [
+            (obj_id, port)
+            for obj_id, panel in self.buttons.items()
+            for number in panel.values()
+            for port in number.values()
+        ]
+        if not ports:
+            self.button_coordinator = None
+            return
+        self.button_coordinator = ButtonCoordinator(
+            self.hass, self.config_entry, self.client, ports
+        )
+        await self.button_coordinator.async_config_entry_first_refresh()
 
     # ------------------------------------------------------------------- polling
 
@@ -190,6 +228,8 @@ class CortexCoordinator(DataUpdateCoordinator[CortexData]):
 
     async def async_shutdown(self) -> None:
         """Cancel timers on unload."""
+        if self.button_coordinator is not None:
+            await self.button_coordinator.async_shutdown()
         for cancel in self._timers:
             cancel()
         self._timers.clear()

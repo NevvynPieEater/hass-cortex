@@ -354,3 +354,71 @@ async def test_diagnostics_redacts_credentials(hass: HomeAssistant, cortex) -> N
     assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 11 + 1
     assert diag["skipped"] == {}
     assert any("Turn On" in line for line in diag["port_layouts"]["Light"])
+
+
+# --------------------------------------------------------------- button panels
+
+
+def button_event_id(hass: HomeAssistant, entry, number: int) -> str:
+    registry = er.async_get(hass)
+    entity_id = registry.async_get_entity_id("event", DOMAIN, f"{entry.entry_id}_81_button_{number}")
+    assert entity_id, f"no event entity for button {number}"
+    return entity_id
+
+
+async def test_button_events_are_created(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    assert len(hass.states.async_all("event")) == 12
+    state = hass.states.get(button_event_id(hass, entry, 4))
+    assert state.attributes["event_types"] == ["single_click", "double_click", "long_press"]
+    assert state.attributes["friendly_name"] == "Kitchen Buttons 4"
+    # on the Kitchen device, with the lights
+    registry = er.async_get(hass)
+    light = registry.async_get(entity_id_for(hass, entry, "76", "light"))
+    assert registry.async_get(state.entity_id).device_id == light.device_id
+
+
+async def test_button_press_fires_once(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    buttons = entry.runtime_data.button_coordinator
+    entity_id = button_event_id(hass, entry, 4)
+    assert hass.states.get(entity_id).attributes.get("event_type") is None
+
+    cortex.state["81"]["Single Click Button 4"] = "100"
+    await buttons.async_refresh()
+    await hass.async_block_till_done()
+    first = hass.states.get(entity_id)
+    assert first.attributes["event_type"] == "single_click"
+
+    # Still held high on the next poll: no second event.
+    await buttons.async_refresh()
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == first.state
+
+    # Released, then a long press on the same button.
+    cortex.state["81"]["Single Click Button 4"] = "0"
+    await buttons.async_refresh()
+    cortex.state["81"]["Long Press Button 4"] = "100"
+    await buttons.async_refresh()
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).attributes["event_type"] == "long_press"
+    # Other buttons are untouched.
+    assert hass.states.get(button_event_id(hass, entry, 5)).attributes.get("event_type") is None
+
+
+async def test_button_already_high_at_start_is_ignored(hass: HomeAssistant, cortex) -> None:
+    cortex.state["81"]["Double Click Button 2"] = "100"
+    entry = await setup_entry(hass, cortex)
+    assert hass.states.get(button_event_id(hass, entry, 2)).attributes.get("event_type") is None
+
+
+async def test_button_interval_option(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    assert entry.runtime_data.button_coordinator.update_interval.total_seconds() == 2
+    result = await hass.config_entries.options.async_init(entry.entry_id)
+    result = await hass.config_entries.options.async_configure(
+        result["flow_id"], {CONF_SCAN_INTERVAL: 45, "button_interval": 1}
+    )
+    await hass.async_block_till_done()
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+    assert entry.options["button_interval"] == 1

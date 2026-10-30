@@ -1116,6 +1116,560 @@
     "Icon on time",
     "ValueOut"
    ]
+  ],
+  "Buttons122": [
+   [
+    "Button 1",
+    "Out"
+   ],
+   [
+    "Button 2",
+    "Out"
+   ],
+   [
+    "Button 3",
+    "Out"
+   ],
+   [
+    "Button 4",
+    "Out"
+   ],
+   [
+    "Button 5",
+    "Out"
+   ],
+   [
+    "Button 6",
+    "Out"
+   ],
+   [
+    "Button 7",
+    "Out"
+   ],
+   [
+    "Button 8",
+    "Out"
+   ],
+   [
+    "Button 9",
+    "Out"
+   ],
+   [
+    "Button 10",
+    "Out"
+   ],
+   [
+    "Button Cancel",
+    "Out"
+   ],
+   [
+    "Button OK",
+    "Out"
+   ],
+   [
+    "Single Click Button 1",
+    "Out"
+   ],
+   [
+    "Single Click Button 2",
+    "Out"
+   ],
+   [
+    "Single Click Button 3",
+    "Out"
+   ],
+   [
+    "Single Click Button 4",
+    "Out"
+   ],
+   [
+    "Single Click Button 5",
+    "Out"
+   ],
+   [
+    "Single Click Button 6",
+    "Out"
+   ],
+   [
+    "Single Click Button 7",
+    "Out"
+   ],
+   [
+    "Single Click Button 8",
+    "Out"
+   ],
+   [
+    "Single Click Button 9",
+    "Out"
+   ],
+   [
+    "Single Click Button 10",
+    "Out"
+   ],
+   [
+    "Single Click Button 11",
+    "Out"
+   ],
+   [
+    "Single Click Button 12",
+    "Out"
+   ],
+   [
+    "Double Click Button 1",
+    "Out"
+   ],
+   [
+    "Double Click Button 2",
+    "Out"
+   ],
+   [
+    "Double Click Button 3",
+    "Out"
+   ],
+   [
+    "Double Click Button 4",
+    "Out"
+   ],
+   [
+    "Double Click Button 5",
+    "Out"
+   ],
+   [
+    "Double Click Button 6",
+    "Out"
+   ],
+   [
+    "Double Click Button 7",
+    "Out"
+   ],
+   [
+    "Double Click Button 8",
+    "Out"
+   ],
+   [
+    "Double Click Button 9",
+    "Out"
+   ],
+   [
+    "Double Click Button 10",
+    "Out"
+   ],
+   [
+    "Double Click Button 11",
+    "Out"
+   ],
+   [
+    "Double Click Button 12",
+    "Out"
+   ],
+   [
+    "Long Press Button 1",
+    "Out"
+   ],
+   [
+    "Long Press Button 2",
+    "Out"
+   ],
+   [
+    "Long Press Button 3",
+    "Out"
+   ],
+   [
+    "Long Press Button 4",
+    "Out"
+   ],
+   [
+    "Long Press Button 5",
+    "Out"
+   ],
+   [
+    "Long Press Button 6",
+    "Out"
+   ],
+   [
+    "Long Press Button 7",
+    "Out"
+   ],
+   [
+    "Long Press Button 8",
+    "Out"
+   ],
+   [
+    "Long Press Button 9",
+    "Out"
+   ],
+   [
+    "Long Press Button 10",
+    "Out"
+   ],
+   [
+    "Long Press Button 11",
+    "Out"
+   ],
+   [
+    "Long Press Button 12",
+    "Out"
+   ],
+   [
+    "Broadcast Button 1",
+    "Out"
+   ],
+   [
+    "Broadcast Button 2",
+    "Out"
+   ],
+   [
+    "Broadcast Button 3",
+    "Out"
+   ],
+   [
+    "Broadcast Button 4",
+    "Out"
+   ],
+   [
+    "Broadcast Button 5",
+    "Out"
+   ],
+   [
+    "Broadcast Button 6",
+    "Out"
+   ],
+   [
+    "Broadcast Button 7",
+    "Out"
+   ],
+   [
+    "Broadcast Button 8",
+    "Out"
+   ],
+   [
+    "Broadcast Button 9",
+    "Out"
+   ],
+   [
+    "Broadcast Button 10",
+    "Out"
+   ],
+   [
+    "Broadcast Button 11",
+    "Out"
+   ],
+   [
+    "Broadcast Button 12",
+    "Out"
+   ],
+   [
+    "Temporary Button 1",
+    "Out"
+   ],
+   [
+    "Temporary Button 2",
+    "Out"
+   ],
+   [
+    "Temporary Button 3",
+    "Out"
+   ],
+   [
+    "Temporary Button 4",
+    "Out"
+   ],
+   [
+    "Temporary Button 5",
+    "Out"
+   ],
+   [
+    "Temporary Button 6",
+    "Out"
+   ],
+   [
+    "Temporary Button 7",
+    "Out"
+   ],
+   [
+    "Temporary Button 8",
+    "Out"
+   ],
+   [
+    "Temporary Button 9",
+    "Out"
+   ],
+   [
+    "Temporary Button 10",
+    "Out"
+   ],
+   [
+    "Temporary Button 11",
+    "Out"
+   ],
+   [
+    "Temporary Button 12",
+    "Out"
+   ],
+   [
+    "Led 1 On",
+    "In"
+   ],
+   [
+    "Led 1 Off",
+    "In"
+   ],
+   [
+    "Led 1 Flash On",
+    "In"
+   ],
+   [
+    "Led 1 Flash Off",
+    "In"
+   ],
+   [
+    "Led 1 Follow state",
+    "In"
+   ],
+   [
+    "Led 2 On",
+    "In"
+   ],
+   [
+    "Led 2 Off",
+    "In"
+   ],
+   [
+    "Led 2 Flash On",
+    "In"
+   ],
+   [
+    "Led 2 Flash Off",
+    "In"
+   ],
+   [
+    "Led 2 Follow state",
+    "In"
+   ],
+   [
+    "Led 3 On",
+    "In"
+   ],
+   [
+    "Led 3 Off",
+    "In"
+   ],
+   [
+    "Led 3 Flash On",
+    "In"
+   ],
+   [
+    "Led 3 Flash Off",
+    "In"
+   ],
+   [
+    "Led 3 Follow state",
+    "In"
+   ],
+   [
+    "Led 4 On",
+    "In"
+   ],
+   [
+    "Led 4 Off",
+    "In"
+   ],
+   [
+    "Led 4 Flash On",
+    "In"
+   ],
+   [
+    "Led 4 Flash Off",
+    "In"
+   ],
+   [
+    "Led 4 Follow state",
+    "In"
+   ],
+   [
+    "Led 5 On",
+    "In"
+   ],
+   [
+    "Led 5 Off",
+    "In"
+   ],
+   [
+    "Led 5 Flash On",
+    "In"
+   ],
+   [
+    "Led 5 Flash Off",
+    "In"
+   ],
+   [
+    "Led 5 Follow state",
+    "In"
+   ],
+   [
+    "Led 6 On",
+    "In"
+   ],
+   [
+    "Led 6 Off",
+    "In"
+   ],
+   [
+    "Led 6 Flash On",
+    "In"
+   ],
+   [
+    "Led 6 Flash Off",
+    "In"
+   ],
+   [
+    "Led 6 Follow state",
+    "In"
+   ],
+   [
+    "Led 7 On",
+    "In"
+   ],
+   [
+    "Led 7 Off",
+    "In"
+   ],
+   [
+    "Led 7 Flash On",
+    "In"
+   ],
+   [
+    "Led 7 Flash Off",
+    "In"
+   ],
+   [
+    "Led 7 Follow state",
+    "In"
+   ],
+   [
+    "Led 8 On",
+    "In"
+   ],
+   [
+    "Led 8 Off",
+    "In"
+   ],
+   [
+    "Led 8 Flash On",
+    "In"
+   ],
+   [
+    "Led 8 Flash Off",
+    "In"
+   ],
+   [
+    "Led 8 Follow state",
+    "In"
+   ],
+   [
+    "Led 9 On",
+    "In"
+   ],
+   [
+    "Led 9 Off",
+    "In"
+   ],
+   [
+    "Led 9 Flash On",
+    "In"
+   ],
+   [
+    "Led 9 Flash Off",
+    "In"
+   ],
+   [
+    "Led 9 Follow state",
+    "In"
+   ],
+   [
+    "Led 10 On",
+    "In"
+   ],
+   [
+    "Led 10 Off",
+    "In"
+   ],
+   [
+    "Led 10 Flash On",
+    "In"
+   ],
+   [
+    "Led 10 Flash Off",
+    "In"
+   ],
+   [
+    "Led 10 Follow state",
+    "In"
+   ],
+   [
+    "Led 11 On",
+    "In"
+   ],
+   [
+    "Led 11 Off",
+    "In"
+   ],
+   [
+    "Led 11 Flash On",
+    "In"
+   ],
+   [
+    "Led 11 Flash Off",
+    "In"
+   ],
+   [
+    "Led 11 Follow state",
+    "In"
+   ],
+   [
+    "Led 12 On",
+    "In"
+   ],
+   [
+    "Led 12 Off",
+    "In"
+   ],
+   [
+    "Led 12 Flash On",
+    "In"
+   ],
+   [
+    "Led 12 Flash Off",
+    "In"
+   ],
+   [
+    "Led 12 Follow state",
+    "In"
+   ],
+   [
+    "Lock Buttons ",
+    "In"
+   ],
+   [
+    "Unlock Buttons ",
+    "In"
+   ],
+   [
+    "Toggle Button lock",
+    "In"
+   ],
+   [
+    "Button Lock Status",
+    "Out"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
   ]
  },
  "values": {
@@ -1493,6 +2047,81 @@
    "Fault": "0",
    "Icon off time": "46323.0000161806",
    "Icon on time": "46322.9998738542"
+  },
+  "81": {
+   "Button 1": "0",
+   "Button 2": "0",
+   "Button 3": "0",
+   "Button 4": "0",
+   "Button 5": "0",
+   "Button 6": "0",
+   "Button 7": "0",
+   "Button 8": "0",
+   "Button 9": "0",
+   "Button 10": "0",
+   "Button Cancel": "0",
+   "Button OK": "0",
+   "Single Click Button 1": "0",
+   "Single Click Button 2": "0",
+   "Single Click Button 3": "0",
+   "Single Click Button 4": "0",
+   "Single Click Button 5": "0",
+   "Single Click Button 6": "0",
+   "Single Click Button 7": "0",
+   "Single Click Button 8": "0",
+   "Single Click Button 9": "0",
+   "Single Click Button 10": "0",
+   "Single Click Button 11": "0",
+   "Single Click Button 12": "0",
+   "Double Click Button 1": "0",
+   "Double Click Button 2": "0",
+   "Double Click Button 3": "0",
+   "Double Click Button 4": "0",
+   "Double Click Button 5": "0",
+   "Double Click Button 6": "0",
+   "Double Click Button 7": "0",
+   "Double Click Button 8": "0",
+   "Double Click Button 9": "0",
+   "Double Click Button 10": "0",
+   "Double Click Button 11": "0",
+   "Double Click Button 12": "0",
+   "Long Press Button 1": "0",
+   "Long Press Button 2": "0",
+   "Long Press Button 3": "0",
+   "Long Press Button 4": "0",
+   "Long Press Button 5": "0",
+   "Long Press Button 6": "0",
+   "Long Press Button 7": "0",
+   "Long Press Button 8": "0",
+   "Long Press Button 9": "0",
+   "Long Press Button 10": "0",
+   "Long Press Button 11": "0",
+   "Long Press Button 12": "0",
+   "Broadcast Button 1": "0",
+   "Broadcast Button 2": "0",
+   "Broadcast Button 3": "0",
+   "Broadcast Button 4": "0",
+   "Broadcast Button 5": "0",
+   "Broadcast Button 6": "0",
+   "Broadcast Button 7": "0",
+   "Broadcast Button 8": "0",
+   "Broadcast Button 9": "0",
+   "Broadcast Button 10": "0",
+   "Broadcast Button 11": "0",
+   "Broadcast Button 12": "0",
+   "Temporary Button 1": "0",
+   "Temporary Button 2": "0",
+   "Temporary Button 3": "0",
+   "Temporary Button 4": "0",
+   "Temporary Button 5": "0",
+   "Temporary Button 6": "0",
+   "Temporary Button 7": "0",
+   "Temporary Button 8": "0",
+   "Temporary Button 9": "0",
+   "Temporary Button 10": "0",
+   "Temporary Button 11": "0",
+   "Temporary Button 12": "0",
+   "Button Lock Status": "0"
   }
  }
 }

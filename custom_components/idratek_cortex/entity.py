@@ -25,6 +25,18 @@ def entity_name(item: SupportedObject) -> str:
     return name[:1].upper() + name[1:]
 
 
+def room_device_info(entry_id: str, parent: str | None) -> DeviceInfo:
+    """Return the shared per-room device."""
+    parent = parent or "Cortex"
+    return DeviceInfo(
+        identifiers={(DOMAIN, f"{entry_id}_room_{slugify_part(parent)}")},
+        name=parent,
+        manufacturer="Idratek",
+        model="Cortex group",
+        via_device=(DOMAIN, f"{entry_id}_hub"),
+    )
+
+
 class CortexEntity(CoordinatorEntity[CortexCoordinator]):
     """An entity backed by one Cortex object."""
 
@@ -51,14 +63,8 @@ class CortexEntity(CoordinatorEntity[CortexCoordinator]):
         # use their own name so they share a device with the lights, blinds and
         # sensors of that room.
         own_device = item.obj.type in (TYPE_HOUSE, TYPE_ROOM)
-        parent = (item.obj.name if own_device else item.obj.parent) or "Cortex"
-        self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, f"{entry_id}_room_{slugify_part(parent)}")},
-            name=parent,
-            manufacturer="Idratek",
-            model="Cortex group",
-            via_device=(DOMAIN, f"{entry_id}_hub"),
-        )
+        parent = item.obj.name if own_device else item.obj.parent
+        self._attr_device_info = room_device_info(entry_id, parent)
 
     @property
     def values(self) -> dict[str, str]:

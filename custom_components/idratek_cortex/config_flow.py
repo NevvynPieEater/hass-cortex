@@ -22,13 +22,17 @@ from homeassistant.helpers.selector import (
 from .api import CortexApiError, CortexClient, CortexConnectionError
 from .const import (
     COMMAND_PORTS,
+    CONF_BUTTON_INTERVAL,
     CONF_SCAN_INTERVAL,
     CONF_SSL,
     CONF_VERIFY_SSL,
     DEFAULT_PORT,
+    DEFAULT_BUTTON_INTERVAL,
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
+    MAX_BUTTON_INTERVAL,
     MAX_SCAN_INTERVAL,
+    MIN_BUTTON_INTERVAL,
     MIN_SCAN_INTERVAL,
 )
 
@@ -166,11 +170,26 @@ class CortexOptionsFlow(OptionsFlow):
         """Manage the options."""
         if user_input is not None:
             return self.async_create_entry(
-                data={CONF_SCAN_INTERVAL: int(user_input[CONF_SCAN_INTERVAL])}
+                data={
+                    CONF_SCAN_INTERVAL: int(user_input[CONF_SCAN_INTERVAL]),
+                    CONF_BUTTON_INTERVAL: int(user_input[CONF_BUTTON_INTERVAL]),
+                }
             )
         current = self.config_entry.options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
+        current_buttons = self.config_entry.options.get(
+            CONF_BUTTON_INTERVAL, DEFAULT_BUTTON_INTERVAL
+        )
         schema = vol.Schema(
             {
+                vol.Required(CONF_BUTTON_INTERVAL, default=current_buttons): NumberSelector(
+                    NumberSelectorConfig(
+                        min=MIN_BUTTON_INTERVAL,
+                        max=MAX_BUTTON_INTERVAL,
+                        step=1,
+                        unit_of_measurement="s",
+                        mode=NumberSelectorMode.BOX,
+                    )
+                ),
                 vol.Required(CONF_SCAN_INTERVAL, default=current): NumberSelector(
                     NumberSelectorConfig(
                         min=MIN_SCAN_INTERVAL,

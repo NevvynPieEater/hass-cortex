@@ -40,7 +40,11 @@
       "init": {
         "title": "Idratek Cortex options",
         "data": {
-          "scan_interval": "Polling interval (seconds)"
+          "scan_interval": "Polling interval (seconds)",
+          "button_interval": "Button polling interval (seconds)"
+        },
+        "data_description": {
+          "button_interval": "How often button panels are read. Presses last a few seconds, so keep this at 1 to 3 seconds."
         }
       }
     }

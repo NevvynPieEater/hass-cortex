@@ -3,9 +3,16 @@
 All notable changes to this project are listed here. Versions below 1.0 are
 still being checked against live systems.
 
-## Unreleased
+## 0.4.0
 
 ### Added
+- Button panels (`Buttons122`): one `event` entity per button with `single_click`,
+  `double_click` and `long_press` events. Cortex button outputs stay high for a few
+  seconds, so a separate poller reads only those ports every 2 seconds (option
+  "Button polling interval", 1 to 60 s). A press is the output rising from 0 to 100;
+  a button already high at start-up does not fire. Names are generic ("Kitchen Buttons 4");
+  rename them in Home Assistant. Pushed events (a webhook) would be better but Cortex's
+  push format has not been found.
 - `PIR` objects (dry-contact PIR inputs) now appear as motion `binary_sensor`s, with the
   long-motion and fault ports as attributes. Ports match the existing Motion type;
   a live trigger has not yet been captured.
