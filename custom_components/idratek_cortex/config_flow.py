@@ -207,7 +207,7 @@ class CortexOptionsFlow(OptionsFlow):
         try:
             url = webhook.async_generate_url(self.hass, webhook_id, allow_external=False)
         except Exception:  # noqa: BLE001 - no internal URL configured
-            url = f"http://<your Home Assistant address>:8123{webhook.async_generate_path(webhook_id)}"
+            url = f"http://YOUR-HOME-ASSISTANT-ADDRESS:8123{webhook.async_generate_path(webhook_id)}"
         return self.async_show_form(
             step_id="init",
             data_schema=schema,

@@ -46,7 +46,7 @@
         "data_description": {
           "button_interval": "How often button panels are read. Presses last a few seconds, so keep this at 1 to 3 seconds."
         },
-        "description": "Push address for Cortex (Web API Client): {webhook_url}\n\nAdd the parameters object=<id>, port=<port name> and value=<the tag for that port, e.g. <Object.Port=?0>>."
+        "description": "Push address for Cortex (Web API Client): {webhook_url}\n\nSend three parameters: object (the Cortex object id), port (the output port name) and value (the Cortex tag for that port). See the README for an example."
       }
     }
   }
