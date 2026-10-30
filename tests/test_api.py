@@ -25,7 +25,7 @@ def make(session, cortex, user="home", password="secret"):
 
 async def test_object_list_with_bad_content_type(session, cortex):
     objects = await make(session, cortex).list_objects()
-    assert len(objects) == 82
+    assert len(objects) == 83
     by_id = {o.id: o for o in objects}
     assert by_id["76"].name == "Main Lights"  # display name, stray space removed
     assert by_id["76"].type == "Light"
@@ -65,7 +65,7 @@ async def test_in_band_permission_error(session, cortex):
 
 async def test_wrong_password_is_anonymous_default(session, cortex):
     client = make(session, cortex, password="wrong")
-    assert len(await client.list_objects()) == 82  # list is open to everyone
+    assert len(await client.list_objects()) == 83  # list is open to everyone
     with pytest.raises(CortexApiError) as err:
         await client.read_port("76", "Set State (Output)")
     assert err.value.permission

@@ -3,6 +3,13 @@
 All notable changes to this project are listed here. Versions below 1.0 are
 still being checked against live systems.
 
+## Unreleased
+
+### Added
+- `PIR` objects (dry-contact PIR inputs) now appear as motion `binary_sensor`s, with the
+  long-motion and fault ports as attributes. Ports match the existing Motion type;
+  a live trigger has not yet been captured.
+
 ## 0.3.0
 
 ### Added

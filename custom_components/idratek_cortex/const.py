@@ -29,6 +29,7 @@ TYPE_HUMIDITY = "Humidity"
 TYPE_LIGHT_LEVEL = "LightLevel"
 TYPE_DOOR = "Door"
 TYPE_MOTION = "Motion"
+TYPE_PIR = "PIR"
 TYPE_HOUSE = "House"
 TYPE_BOILER = "Boiler"
 TYPE_HEAT_ZONE = "HeatZone"
@@ -54,6 +55,7 @@ STATE_PORTS: dict[str, dict[str, str]] = {
     TYPE_LIGHT_LEVEL: {"state": "Light Level Output", "dark": "Dark Output"},
     TYPE_DOOR: {"state": "Door output state", "fault": "Fault"},
     TYPE_MOTION: {"state": "Output", "long": "Long motion sense output", "fault": "Fault"},
+    TYPE_PIR: {"state": "Output", "long": "Long motion sense output", "fault": "Fault"},
     TYPE_HOUSE: {
         "state": "Presence state output",
         "vacant": "Vacant state output",

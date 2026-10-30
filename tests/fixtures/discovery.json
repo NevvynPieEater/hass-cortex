@@ -311,6 +311,17 @@
    "Prompt.Display.Option.ParameterString": {},
    "IconOffset": "0",
    "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "PIR",
+   "FriendlyName": "Driveway PIR Input  3",
+   "IDNumber": "1057",
+   "RefImage": "34",
+   "Parent": "Outside",
+   "Prompt.Display.Name": "Driveway PIR Input  3",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
   }
  ],
  "layouts": {
@@ -1075,6 +1086,36 @@
     "Icon on time",
     "ValueOut"
    ]
+  ],
+  "PIR": [
+   [
+    "Output",
+    "Out"
+   ],
+   [
+    "Alternative motion source",
+    "In"
+   ],
+   [
+    "Block the output",
+    "In"
+   ],
+   [
+    "Long motion sense output",
+    "Out"
+   ],
+   [
+    "Fault",
+    "Out"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
   ]
  },
  "values": {
@@ -1445,6 +1486,13 @@
    "On delayed unoccupied": "100",
    "Icon off time": "46323.0013706597",
    "Icon on time": "46323.0014356597"
+  },
+  "1057": {
+   "Output": "0",
+   "Long motion sense output": "0",
+   "Fault": "0",
+   "Icon off time": "46323.0000161806",
+   "Icon on time": "46322.9998738542"
   }
  }
 }

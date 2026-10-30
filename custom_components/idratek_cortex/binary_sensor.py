@@ -22,6 +22,7 @@ from .const import (
     TYPE_HVAC,
     TYPE_LIGHT_LEVEL,
     TYPE_MOTION,
+    TYPE_PIR,
     TYPE_ROOM,
 )
 from .coordinator import CortexCoordinator, SupportedObject
@@ -45,6 +46,12 @@ SPECS: dict[str, tuple[BinarySpec, ...]] = {
     # "Door output state": 100 is treated as open (see README).
     TYPE_DOOR: (BinarySpec("state", None, BinarySensorDeviceClass.DOOR, first=True, attributes=("fault",)),),
     TYPE_MOTION: (
+        BinarySpec(
+            "state", None, BinarySensorDeviceClass.MOTION, first=True, attributes=("long", "fault")
+        ),
+    ),
+    # Dry-contact PIR inputs expose the same ports as a Motion object.
+    TYPE_PIR: (
         BinarySpec(
             "state", None, BinarySensorDeviceClass.MOTION, first=True, attributes=("long", "fault")
         ),

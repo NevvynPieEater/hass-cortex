@@ -147,7 +147,7 @@ async def test_entities_created(hass: HomeAssistant, cortex) -> None:
     assert len(hass.states.async_all("sensor")) == 22
     # 6 doors, 1 motion, 3 property presence, 1 dark, 4 boiler, 2 heat zone, 1 fan, 2 HVAC,
     # 11 room occupancy (the delayed-occupancy sensors are disabled by default)
-    assert len(hass.states.async_all("binary_sensor")) == 31
+    assert len(hass.states.async_all("binary_sensor")) == 32
     coordinator = entry.runtime_data
     assert not coordinator.skipped
 
@@ -351,6 +351,6 @@ async def test_diagnostics_redacts_credentials(hass: HomeAssistant, cortex) -> N
     assert "127.0.0.1" not in text
     assert diag["entry"][CONF_PASSWORD] == "**REDACTED**"
     assert diag["object_counts"]["Light"] == 21
-    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 11
+    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 11 + 1
     assert diag["skipped"] == {}
     assert any("Turn On" in line for line in diag["port_layouts"]["Light"])
