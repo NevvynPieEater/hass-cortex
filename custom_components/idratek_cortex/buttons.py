@@ -49,7 +49,7 @@ class ButtonCoordinator(DataUpdateCoordinator[dict[str, bool]]):
             _LOGGER,
             config_entry=entry,
             name=f"{DOMAIN}_buttons",
-            update_interval=timedelta(seconds=interval),
+            update_interval=timedelta(seconds=interval) if interval > 0 else None,
         )
         self.client = client
         self.ports = ports

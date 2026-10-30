@@ -38,7 +38,7 @@ This integration is built from captured replies of a real installation, checked 
 | Boiler, HeatZone, FanControl | `binary_sensor` (running / heat) | Read verified |
 | HVAC | heating and cooling demand `binary_sensor`s, set-point `sensor`s | Read verified |
 
-Button panels (`Buttons122`) become `event` entities, read by a fast 2-second poller; mapping of Cortex button numbers to physical keys is not yet confirmed. The intercom is not exposed yet.
+Button panels (`Buttons122`) become `event` entities, fired by push from Cortex (see below), with an optional fast poller if you set a button polling interval; mapping of Cortex button numbers to physical keys is not yet confirmed. The intercom is not exposed yet.
 
 Tested with a mock Cortex built from real replies (38 automated tests) on Home Assistant 2026.2.3.
 Not yet run against a live Cortex from inside Home Assistant.
@@ -98,7 +98,7 @@ In Cortex, add an item to a Web API Client object:
 - URL key list: `object` = the Cortex object id, `port` = the output port name, `value` = the tag for that port, for example `<Driveway PIR Input  3.Output=?0>`
 - Connect the object's output port to the item's send port, and tick "Allow sending of messages" on the client
 
-Example for the driveway PIR: `object=1057`, `port=Output`, `value=<Driveway PIR Input  3.Output=?0>`, triggered by the PIR's `Output`. For a button panel use the press port, for example `port=Single Click Button 8`. One item is needed per port; Cortex cannot tell which object called it. This has not yet been tried on a live system.
+Example for the driveway PIR: `object=1057`, `port=Output`, `value=<Driveway PIR Input  3.Output=?0>`, triggered by the PIR's `Output`. For a button panel use the press port, for example `port=Single Click Button 8`; button polling is off by default, so pushes are the only source of presses unless you set a button polling interval in Configure. One item is needed per port; Cortex cannot tell which object called it. This has not yet been tried on a live system.
 
 ---
 

@@ -11,8 +11,8 @@ CONF_BUTTON_INTERVAL = "button_interval"
 
 DEFAULT_PORT = 8000
 DEFAULT_SCAN_INTERVAL = 30  # seconds
-DEFAULT_BUTTON_INTERVAL = 2  # seconds between button polls (after the previous one ends)
-MIN_BUTTON_INTERVAL = 1
+DEFAULT_BUTTON_INTERVAL = 0  # seconds between button polls; 0 = off (buttons arrive by push)
+MIN_BUTTON_INTERVAL = 0
 MAX_BUTTON_INTERVAL = 60
 MIN_SCAN_INTERVAL = 5
 MAX_SCAN_INTERVAL = 3600

@@ -415,7 +415,7 @@ async def test_button_already_high_at_start_is_ignored(hass: HomeAssistant, cort
 
 async def test_button_interval_option(hass: HomeAssistant, cortex) -> None:
     entry = await setup_entry(hass, cortex)
-    assert entry.runtime_data.button_coordinator.update_interval.total_seconds() == 2
+    assert entry.runtime_data.button_coordinator.update_interval is None  # push only by default
     result = await hass.config_entries.options.async_init(entry.entry_id)
     result = await hass.config_entries.options.async_configure(
         result["flow_id"], {CONF_SCAN_INTERVAL: 45, "button_interval": 1}
@@ -423,6 +423,7 @@ async def test_button_interval_option(hass: HomeAssistant, cortex) -> None:
     await hass.async_block_till_done()
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert entry.options["button_interval"] == 1
+    assert entry.runtime_data.button_coordinator.update_interval.total_seconds() == 1
 
 
 # ------------------------------------------------------------- pushed values
