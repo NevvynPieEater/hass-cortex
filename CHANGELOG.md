@@ -3,6 +3,16 @@
 All notable changes to this project are listed here. Versions below 1.0 are
 still being checked against live systems.
 
+## 0.5.1
+
+### Fixed
+- The Configure dialog showed "Translation error: INVALID_TAG" because the push text
+  contained angle brackets. Reworded.
+
+### Changed
+- Button polling is now off by default (interval 0): presses are expected by push. Set a
+  button polling interval of 1 to 3 seconds in Configure to turn the fast poller back on.
+
 ## 0.5.0
 
 ### Added
@@ -12,8 +22,6 @@ still being checked against live systems.
   state port (PIRs, doors, lights, temperatures and so on). A button panel press port
   above 0 fires that button's event. Polling carries on as a fallback. The webhook is
   limited to the local network.
-- Button polling is now off by default (interval 0): presses are expected by push. Set a
-  button polling interval of 1 to 3 seconds in Configure to turn the fast poller back on.
 
 ## 0.4.0
 
