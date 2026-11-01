@@ -322,6 +322,17 @@
    "Prompt.Display.Option.ParameterString": {},
    "IconOffset": "0",
    "FeatureAvailable": "1"
+  },
+  {
+   "ControlObjectType": "AllLight",
+   "FriendlyName": "All Light",
+   "IDNumber": "6",
+   "RefImage": "1",
+   "Parent": "World",
+   "Prompt.Display.Name": "All Light",
+   "Prompt.Display.Option.ParameterString": {},
+   "IconOffset": "0",
+   "FeatureAvailable": "1"
   }
  ],
  "layouts": {
@@ -1670,6 +1681,68 @@
     "Icon on time",
     "ValueOut"
    ]
+  ],
+  "AllLight": [
+   [
+    "Good Night",
+    "In"
+   ],
+   [
+    "Speak",
+    "In"
+   ],
+   [
+    "Stealth Enable",
+    "In"
+   ],
+   [
+    "Stealth Disable",
+    "In"
+   ],
+   [
+    "Stealth Toggle",
+    "In"
+   ],
+   [
+    "Display",
+    "In"
+   ],
+   [
+    "Dark state input for occupancy simulation",
+    "In"
+   ],
+   [
+    "Stealth State (Output)",
+    "Out"
+   ],
+   [
+    "Occupancy Simulation Enable",
+    "In"
+   ],
+   [
+    "Occupancy Simulation Disable",
+    "In"
+   ],
+   [
+    "Occupancy Simulation Toggle",
+    "In"
+   ],
+   [
+    "Occupancy Simulation Enabled State(Output)",
+    "Out"
+   ],
+   [
+    "Occupancy Simulation Active State(Output)",
+    "Out"
+   ],
+   [
+    "Icon off time",
+    "ValueOut"
+   ],
+   [
+    "Icon on time",
+    "ValueOut"
+   ]
   ]
  },
  "values": {
@@ -2122,6 +2195,11 @@
    "Temporary Button 11": "0",
    "Temporary Button 12": "0",
    "Button Lock Status": "0"
+  },
+  "6": {
+   "Stealth State (Output)": "0",
+   "Occupancy Simulation Enabled State(Output)": "0",
+   "Occupancy Simulation Active State(Output)": "0"
   }
  }
 }

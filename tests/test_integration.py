@@ -142,7 +142,9 @@ async def test_entities_created(hass: HomeAssistant, cortex) -> None:
     entry = await setup_entry(hass, cortex)
     assert len(hass.states.async_all("light")) == 21
     assert len(hass.states.async_all("cover")) == 13
-    assert len(hass.states.async_all("switch")) == 1
+    # 1 socket + the All Light Stealth and occupancy simulation switches
+    assert len(hass.states.async_all("switch")) == 3
+    assert len(hass.states.async_all("button")) == 1
     # 18 temperatures + humidity + light level + 2 HVAC set-points
     # (the dew point sensor is disabled by default)
     assert len(hass.states.async_all("sensor")) == 22
@@ -352,7 +354,7 @@ async def test_diagnostics_redacts_credentials(hass: HomeAssistant, cortex) -> N
     assert "127.0.0.1" not in text
     assert diag["entry"][CONF_PASSWORD] == "**REDACTED**"
     assert diag["object_counts"]["Light"] == 21
-    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 11 + 1
+    assert len(diag["supported"]) == 35 + 18 + 1 + 6 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 11 + 1 + 1
     assert diag["skipped"] == {}
     assert any("Turn On" in line for line in diag["port_layouts"]["Light"])
 
@@ -481,3 +483,56 @@ async def test_pushed_button_press_fires_event(hass: HomeAssistant, cortex, hass
     await client.post(path, params={"object": "81", "port": "Single Click Button 8", "value": "100"})
     await hass.async_block_till_done()
     assert hass.states.get(entity_id).state == first
+
+
+# ------------------------------------------------------------------- All Light
+
+
+def all_light_id(hass: HomeAssistant, entry, role: str, domain: str = "switch") -> str:
+    registry = er.async_get(hass)
+    suffix = f"{entry.entry_id}_6" + ("" if domain == "button" else f"_{role}")
+    unique = f"{entry.entry_id}_6_{role}"
+    entity_id = registry.async_get_entity_id(domain, DOMAIN, unique)
+    assert entity_id, f"no {domain} for {suffix}"
+    return entity_id
+
+
+async def test_all_light_stealth_switch(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    entity_id = all_light_id(hass, entry, "stealth")
+    state = hass.states.get(entity_id)
+    assert state.state == STATE_OFF
+    assert state.attributes["friendly_name"] == "All Light Stealth mode"
+
+    await hass.services.async_call("switch", "turn_on", {"entity_id": entity_id}, blocking=True)
+    assert cortex.state["6"]["Stealth State (Output)"] == "100"
+    assert ("POST", "/api/v1/Objects.json/6?Stealth%20Enable=1") in cortex.requests
+    assert hass.states.get(entity_id).state == STATE_ON
+
+    await hass.services.async_call("switch", "turn_off", {"entity_id": entity_id}, blocking=True)
+    assert ("POST", "/api/v1/Objects.json/6?Stealth%20Disable=1") in cortex.requests
+    assert hass.states.get(entity_id).state == STATE_OFF
+
+
+async def test_all_light_occupancy_and_good_night(hass: HomeAssistant, cortex) -> None:
+    entry = await setup_entry(hass, cortex)
+    occupancy = all_light_id(hass, entry, "occupancy_enabled")
+    await hass.services.async_call("switch", "turn_on", {"entity_id": occupancy}, blocking=True)
+    state = hass.states.get(occupancy)
+    assert state.state == STATE_ON
+    assert state.attributes["active"] is False
+
+    button = all_light_id(hass, entry, "good_night", "button")
+    await hass.services.async_call("button", "press", {"entity_id": button}, blocking=True)
+    assert ("POST", "/api/v1/Objects.json/6?Good%20Night=1") in cortex.requests
+
+
+async def test_pushed_stealth_state(hass: HomeAssistant, cortex, hass_client_no_auth) -> None:
+    entry = await setup_entry(hass, cortex)
+    entity_id = all_light_id(hass, entry, "stealth")
+    client = await hass_client_no_auth()
+    url = f"/api/webhook/{entry.data[CONF_WEBHOOK_ID]}"
+    response = await client.get(url, params={"object": "6", "port": "Stealth State (Output)", "value": "100"})
+    assert response.status == 200
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_ON

@@ -7,7 +7,7 @@ import re
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, TYPE_HOUSE, TYPE_ROOM
+from .const import DOMAIN, TYPE_ALL_LIGHT, TYPE_HOUSE, TYPE_ROOM
 from .coordinator import CortexCoordinator, SupportedObject
 
 
@@ -59,10 +59,10 @@ class CortexEntity(CoordinatorEntity[CortexCoordinator]):
             f"{entry_id}_{item.id}" if role is None else f"{entry_id}_{item.id}_{role}"
         )
         self._attr_name = entity_name(item)
-        # "House" and "Room" objects sit under pseudo-parents ("World", "Downstairs"):
+        # "House", "Room" and "All Light" objects sit under pseudo-parents ("World", "Downstairs"):
         # use their own name so they share a device with the lights, blinds and
         # sensors of that room.
-        own_device = item.obj.type in (TYPE_HOUSE, TYPE_ROOM)
+        own_device = item.obj.type in (TYPE_HOUSE, TYPE_ROOM, TYPE_ALL_LIGHT)
         parent = item.obj.name if own_device else item.obj.parent
         self._attr_device_info = room_device_info(entry_id, parent)
 

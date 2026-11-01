@@ -67,6 +67,18 @@ LAYOUTS = {
     **{t: [tuple(p) for p in ports] for t, ports in DISCOVERY["layouts"].items()},
 }
 
+STEALTH = "Stealth State (Output)"
+OCCUPANCY = "Occupancy Simulation Enabled State(Output)"
+# action -> (state port, value); value None = toggle; port None = momentary action
+ALL_LIGHT_ACTIONS = {
+    "Stealth Enable": (STEALTH, "100"),
+    "Stealth Disable": (STEALTH, "0"),
+    "Stealth Toggle": (STEALTH, None),
+    "Occupancy Simulation Enable": (OCCUPANCY, "100"),
+    "Occupancy Simulation Disable": (OCCUPANCY, "0"),
+    "Good Night": (None, None),
+}
+
 BAD_HEADER = {"Content-Type": "Content-Type: application/JSON"}
 SYNAPSE_HEADER = {"Content-Type": "Content-Type: application/Synapse"}
 
@@ -180,6 +192,14 @@ class MockCortex:
                 values["State (Output)"], values["Set State (Output) Analogue"] = "100", "100"
             elif action == "Close":  # closed = 0 is an assumption, not yet seen live
                 values["State (Output)"], values["Set State (Output) Analogue"] = "0", "0"
+        elif t == "AllLight" and action in ALL_LIGHT_ACTIONS:
+            key, value = ALL_LIGHT_ACTIONS[action]
+            if key is None:
+                values["Good Night"] = "1"
+            elif value is None:  # toggle
+                values[key] = "0" if values[key] != "0" else "100"
+            else:
+                values[key] = value
         else:
             return self._text("404 Port does not exist")
         body = json.dumps({"CortexAPI": {"Code": "200", "Message": "OK"}}, indent=2)

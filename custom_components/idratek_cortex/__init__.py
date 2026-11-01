@@ -17,6 +17,7 @@ from .coordinator import CortexCoordinator
 
 PLATFORMS = [
     Platform.BINARY_SENSOR,
+    Platform.BUTTON,
     Platform.COVER,
     Platform.EVENT,
     Platform.LIGHT,

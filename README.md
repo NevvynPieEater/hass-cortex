@@ -32,7 +32,8 @@ This integration is built from captured replies of a real installation, checked 
 | LightLevel | `sensor` (raw value, unit unconfirmed) and a `binary_sensor` "Dark" | Read verified |
 | Door | `binary_sensor` (door) | Read verified. Assumes `Door output state` 100 = open (not yet confirmed on site) |
 | Motion | `binary_sensor` (motion) | Read verified |
-| PIR | `binary_sensor` (motion) | Read verified; trigger not yet seen |
+| PIR | `binary_sensor` (motion) | Read and push verified live |
+| All Light | `switch` (Stealth mode, Occupancy simulation), `button` (Good night) | Stealth verified live; others untried |
 | Room | `binary_sensor` (occupancy) per room, plus a delayed occupancy sensor that is disabled by default | Read verified |
 | House | `binary_sensor` (occupancy), vacant mode, unoccupied over 24 hours | Read verified |
 | Boiler, HeatZone, FanControl | `binary_sensor` (running / heat) | Read verified |

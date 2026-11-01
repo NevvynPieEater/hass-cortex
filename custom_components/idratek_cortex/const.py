@@ -41,6 +41,7 @@ TYPE_FAN = "FanControl"
 TYPE_HVAC = "HVAC"
 TYPE_ROOM = "Room"
 TYPE_BUTTONS = "Buttons122"
+TYPE_ALL_LIGHT = "AllLight"
 
 # Button panels: each Cortex button has momentary outputs per press type. They stay at
 # 100 for a few seconds, so a fast poll can catch them (a 30 s poll cannot).
@@ -82,6 +83,12 @@ STATE_PORTS: dict[str, dict[str, str]] = {
         "state": "Occupied state output",
         "delayed": "Delayed occupied state output",
     },
+    # House-wide light control: Stealth mode and occupancy simulation.
+    TYPE_ALL_LIGHT: {
+        "stealth": "Stealth State (Output)",
+        "occupancy_enabled": "Occupancy Simulation Enabled State(Output)",
+        "occupancy_active": "Occupancy Simulation Active State(Output)",
+    },
     TYPE_HVAC: {
         "heating": "To Zone Valve or Boiler",
         "cooling": "To Damper or AC",
@@ -96,6 +103,13 @@ COMMAND_PORTS: dict[str, dict[str, str]] = {
     TYPE_LIGHT: {"on": "Turn On", "off": "Turn Off"},
     TYPE_ONOFF: {"on": "Turn on", "off": "Turn off"},
     TYPE_BLIND: {"open": "Open", "close": "Close", "stop": "Stop"},
+    TYPE_ALL_LIGHT: {
+        "stealth_on": "Stealth Enable",
+        "stealth_off": "Stealth Disable",
+        "occupancy_on": "Occupancy Simulation Enable",
+        "occupancy_off": "Occupancy Simulation Disable",
+        "good_night": "Good Night",
+    },
 }
 
 # Seconds after a blind command at which its state is read again.

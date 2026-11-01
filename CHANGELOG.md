@@ -3,6 +3,17 @@
 All notable changes to this project are listed here. Versions below 1.0 are
 still being checked against live systems.
 
+## 0.6.0
+
+### Added
+- All Light object (type `AllLight`): a **Stealth mode** switch, an **Occupancy simulation**
+  switch (with an `active` attribute) and a **Good night** button. Stealth was tested live:
+  Stealth Toggle, Stealth State (Output) and the switch commands all worked through the Web
+  API. The occupancy simulation switch and Good night button use the same call but have not
+  been tried on a live system.
+- The All Light object has to be enabled for the Web API for the user the integration uses
+  (and, on the install this was developed against, for the `default` user too).
+
 ## 0.5.1
 
 ### Fixed
