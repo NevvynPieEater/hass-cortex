@@ -99,7 +99,15 @@ In Cortex, add an item to a Web API Client object:
 - URL key list: `object` = the Cortex object id, `port` = the output port name, `value` = the tag for that port, for example `<Driveway PIR Input  3.Output=?0>`
 - Connect the object's output port to the item's send port, and tick "Allow sending of messages" on the client
 
-Example for the driveway PIR: `object=1057`, `port=Output`, `value=<Driveway PIR Input  3.Output=?0>`, triggered by the PIR's `Output`. For a button panel use the press port, for example `port=Single Click Button 8`; button polling is off by default, so pushes are the only source of presses unless you set a button polling interval in Configure. One item is needed per port; Cortex cannot tell which object called it. This has not yet been tried on a live system.
+Example for the driveway PIR: `object=1057`, `port=Output`, `value=<Driveway PIR Input  3.Output=?0>`, triggered by the PIR's `Output`. This was tried on a live system: the sensor changes within about a second, and Cortex sends both the on and the off change from the one item.
+
+For a button panel, add one item per press type (single click, double click, long press), each connected to its own press output. Cortex only sends a trigger when a button is pressed (Idratek confirm there is no output that stays high), so use a fixed value: `object=81`, `port=Single Click Button 8`, `value=100`. Any value above 0 counts as a press. Button polling is off by default, so pushes are the only source of presses unless you set a button polling interval in Configure.
+
+Things to know:
+- One item is needed per port; Cortex cannot tell which object called it.
+- Tick **Allow sending of messages** on the Web API Client object, or connections will not trigger its items (the Test Send button works regardless).
+- If Home Assistant does not answer, the request waits and times out slowly, but it does not hold up other Cortex processing (Idratek).
+- Use a current Cortex build (W10.3.2 at the time of writing); several fixes have affected the API client.
 
 ---
 
@@ -107,6 +115,7 @@ Example for the driveway PIR: `object=1057`, `port=Output`, `value=<Driveway PIR
 
 - Polls every 30 seconds by default (5 seconds minimum, set in the integration options). Roughly 70 small requests per cycle.
 - Cortex reports problems inside normal replies (for example `401 USER x not permitted...`). These show as unavailable entities or as an error when a button is pressed.
+- Cortex's own email sending (Direct SMTP) is separate from this integration. Idratek suggest port 587 with SSL and the "Simple login" option (OAuth is not supported, so Gmail needs an app password), and enabling email logging under Logging, Diagnostic to see what is happening. There is no retry.
 - The login is sent as HTTP Basic. Use HTTPS if the network is not trusted.
 - Not built yet: a generic service to trigger any input port, floors, setting a blind to a specific position.
 
